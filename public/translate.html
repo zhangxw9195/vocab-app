@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英汉互译</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>英汉互译系统</h1>
+            <div id="user-info">
+                <span id="username"></span>
+                <button id="manage-btn" class="admin-only">管理词汇</button>
+                <button id="logout-btn">注销</button>
+                <!-- 用户角色提示 -->
+                <div id="user-role-hint" class="role-hint"></div>
+            </div>
+            
+        </header>
+
+        <main>
+            <section id="translate-section">
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="输入英文单词或中文释义...">
+                    <button id="search-btn">查询</button>
+                </div>
+                
+                <div id="search-results">
+                    <table id="result-table">
+                        <thead>
+                            <tr>
+                                <th>英文单词</th>
+                                <th>中文释义</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="translate.js"></script>
+</body>
+</html>

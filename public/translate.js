@@ -19,7 +19,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // 搜索词汇
     async function searchVocab(query) {
-        try {
+        const searchInput = document.getElementById('search-input').value.trim();
+        const resultContainer = document.getElementById('search-results');
+        // 清空之前的结果
+        resultContainer.classList.remove('visible');
+
+        // 检查输入是否为空
+        if (!searchInput) {
+            return; // 不执行查询
+        }
+        
+        try {          
             const response = await fetch('/api/vocab');
             if (!response.ok) throw new Error('搜索失败');
             
@@ -40,8 +50,14 @@ document.addEventListener('DOMContentLoaded', async () => {
                 `;
                 tbody.appendChild(row);
             });
+
+            // 显示结果区域
+            resultContainer.classList.add('visible');
         } catch (error) {
             console.error('搜索失败:', error);
+
+            // 无结果时不显示区域
+            resultContainer.classList.remove('visible');
         }
     }
 

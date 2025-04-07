@@ -1,0 +1,60 @@
+[
+  {
+    "id": 2,
+    "word": "test",
+    "definition": "测试222",
+    "createdBy": "admin",
+    "createdAt": "2025-03-28T08:16:28.713Z",
+    "updatedAt": "2025-04-07T08:23:13.152Z"
+  },
+  {
+    "id": 3,
+    "word": "apple",
+    "definition": "苹果",
+    "createdBy": "admin",
+    "createdAt": "2025-03-28T08:16:28.713Z"
+  },
+  {
+    "id": 4,
+    "word": "orange",
+    "definition": "橙子",
+    "createdBy": "admin",
+    "createdAt": "2025-03-28T08:16:28.713Z"
+  },
+  {
+    "id": 5,
+    "word": "banana",
+    "definition": "香蕉",
+    "createdBy": "admin",
+    "createdAt": "2025-03-28T08:16:28.713Z"
+  },
+  {
+    "id": 6,
+    "word": "good",
+    "definition": "很好",
+    "createdBy": "admin",
+    "createdAt": "2025-03-31T01:53:51.171Z"
+  },
+  {
+    "id": 7,
+    "word": "bad",
+    "definition": "坏的",
+    "createdBy": "admin",
+    "createdAt": "2025-03-31T05:17:42.063Z"
+  },
+  {
+    "id": 8,
+    "word": "HMI test",
+    "definition": "HMI测试1",
+    "createdBy": "admin",
+    "createdAt": "2025/4/3 16:34:17",
+    "updatedAt": "2025-04-03T08:34:35.707Z"
+  },
+  {
+    "id": 9,
+    "word": "YES",
+    "definition": "是的",
+    "createdBy": "admin",
+    "createdAt": "2025/4/7 09:55:13"
+  }
+]

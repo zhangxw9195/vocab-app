@@ -1,0 +1,565 @@
+/* 基础样式 */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+#user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+button {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#logout-btn {
+    background-color: #f44336;
+}
+
+#logout-btn:hover {
+    background-color: #d32f2f;
+}
+
+/* 词汇表格 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+tr:hover {
+    background-color: #f9f9f9;
+}
+
+.delete-btn {
+    background-color: #f44336;
+    padding: 5px 10px;
+    font-size: 13px;
+}
+
+.delete-btn:hover {
+    background-color: #d32f2f;
+}
+
+/* 操作按钮 */
+.actions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* 模态框 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1000;
+}
+
+.modal:not(.hidden) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 25px;
+    border-radius: 5px;
+    width: 400px;
+    max-width: 90%;
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* 表单样式 */
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"],
+textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* 登录/注册页面 */
+.auth-container {
+    max-width: 500px;
+    margin: 50px auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.tab-btn {
+    padding: 10px 20px;
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    font-size: 16px;
+    border-bottom: 3px solid transparent;
+}
+
+.tab-btn.active {
+    color: #4CAF50;
+    border-bottom-color: #4CAF50;
+    font-weight: bold;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    #user-info {
+        margin-top: 10px;
+    }
+    
+    table {
+        font-size: 14px;
+    }
+    
+    th, td {
+        padding: 8px 10px;
+    }
+}
+
+/*  */
+/*  */
+/*  */
+
+/* [保持之前的基础样式不变] */
+
+/* 新增翻译界面样式 */
+.search-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#search-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#result-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#result-table th, #result-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#result-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+/* 调整管理按钮位置 */
+#user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#translate-btn, #manage-btn {
+    background-color: #2196F3;
+}
+
+#translate-btn:hover, #manage-btn:hover {
+    background-color: #0b7dda;
+}
+
+/* 添加加载动画 */
+.spinner {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* 文件上传区域样式 */
+#import-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#import-file {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* 错误提示样式 */
+.error-message {
+    color: #f44336;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
+
+/* 用户角色提示 */
+#user-role-hint {
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-left: auto;
+}
+
+/* 管理员样式 */
+.role-admin {
+    background-color: #ffebee;
+    color: #d32f2f;
+}
+
+/* 普通用户样式 */
+.role-user {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+/*  */
+/*  */
+/*  */
+
+
+/* 角色提示样式 */
+.role-hint {
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-left: auto;
+}
+
+.role-admin {
+    background-color: #ffebee;
+    color: #d32f2f;
+}
+
+.role-user {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+
+
+/*  */
+/*  */
+/*  */
+
+/* 编辑按钮样式 */
+.edit-btn, .save-btn, .cancel-btn {
+    padding: 4px 8px;
+    margin-right: 5px;
+    font-size: 14px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.edit-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+}
+
+.save-btn {
+    background-color: #2196F3;
+    color: white;
+    border: none;
+}
+
+.cancel-btn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+}
+
+/* .hidden {
+    display: none;
+} */
+
+/* 编辑输入框样式 */
+.edit-word {
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.edit-definition {
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+    min-height: 60px;
+    resize: vertical;
+}
+
+/* 确保按钮显示为行内元素 */
+.edit-btn, .save-btn, .cancel-btn, .delete-btn {
+    display: inline-block;
+    margin: 0 5px 5px 0;
+    vertical-align: middle;
+}
+
+/* 操作列宽度 */
+#vocab-table td:last-child {
+    min-width: 220px; /* 确保有足够空间显示所有按钮 */
+}
+
+
+/* 确保按钮正确排列 */
+td button {
+    margin: 2px;
+    min-width: 60px;
+}
+
+/* 编辑状态输入框样式 */
+.edit-word {
+    width: 95%;
+    padding: 4px;
+}
+
+.edit-definition {
+    width: 95%;
+    height: 60px;
+    padding: 4px;
+    resize: vertical;
+}
+
+
+/*  */
+/*  */
+/*  */
+/* 20250407 */
+
+
+/* 管理员模式下显示 */
+/* .admin-mode .admin-only,
+body.admin-mode .admin-only {
+  display: block !important; 
+} */
+
+
+
+
+/*  */
+/*  */
+/*  */
+
+/* 确保隐藏类优先级最高 */
+/* .hidden {
+  display: none !important;
+} */
+
+
+/* 确保初始状态所有管理按钮隐藏 */
+.edit-btn, .save-btn, .cancel-btn, .delete-btn {
+    display: none !important;
+  }
+  
+  /* 管理员模式下显示编辑和删除按钮 */
+  .admin-mode .edit-btn,
+  .admin-mode .delete-btn {
+    display: inline-block !important;
+  }
+  
+  /* 编辑模式下显示保存和取消按钮 */
+  .edit-mode .save-btn,
+  .edit-mode .cancel-btn {
+    display: inline-block !important;
+  } 
+  
+  
+  /* 确保初始状态保存和取消按钮隐藏 */
+  .save-btn, .cancel-btn {
+    display: none !important;
+  }
+  
+  /* 编辑模式下显示保存和取消按钮 */
+  .edit-mode .save-btn,
+  .edit-mode .cancel-btn {
+    display: inline-block !important;
+  }
+  
+  /* 确保编辑和删除按钮正常显示 */
+  .admin-mode .edit-btn,
+  .admin-mode .delete-btn {
+    display: inline-block !important;
+  }
+
+
+
+/*  */
+/*  */
+/*  */
+
+/* 防止按钮闪烁的CSS优化*/
+/* 初始隐藏所有管理元素 */
+/* #add-vocab-btn,
+#export-btn,
+#import-form,
+.delete-btn {
+    display: none !important;
+} */
+
+/* 管理员模式下显示 */
+/* .admin-mode #add-vocab-btn,
+.admin-mode #export-btn,
+.admin-mode #import-form,
+.admin-mode .delete-btn {
+    display: initial !important;
+} */
+
+
+/* 默认隐藏管理员专用元素 */
+/* .admin-only {
+    display: none !important;
+} */
+
+/* 管理员模式下显示 */
+/* .admin-mode .admin-only {
+    display: inline-block !important;
+} */
+
+
+/*20250407*/
+
+/* 确保初始状态保存和取消按钮隐藏 */
+.save-btn, .cancel-btn {
+    display: none !important;
+  }
+  
+  /* 编辑模式下显示保存和取消按钮 */
+  .edit-mode .save-btn,
+  .edit-mode .cancel-btn {
+    display: inline-block !important;
+  }
+  
+  /* 编辑模式下隐藏编辑和删除按钮 */
+  .edit-mode .edit-btn,
+  .edit-mode .delete-btn {
+    display: none !important;
+  }
+
+
+/*20250407 以下两句作用是登录非管理员账户时隐藏“词汇管理”按钮，但是加上以下两句后，保存和取消按钮打开页面就显示着了*/
+
+/* 默认隐藏管理员专用元素 */
+.admin-only {
+    display: none !important;
+  }
+  
+  /* 管理员模式下显示 */
+  .admin-mode .admin-only {
+    display: inline-block !important;
+  }
+
+
+/* 20250407 */

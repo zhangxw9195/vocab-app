@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>词汇管理</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>词汇管理系统</h1>
+            <div id="user-info">
+                <span id="username"></span>
+                <button id="translate-btn">返回翻译</button>
+                <button id="logout-btn">注销</button>
+            </div>
+        </header>
+
+        <main>
+            <section id="vocab-section">
+                <h2>词汇管理</h2>
+                <div class="actions">
+                   
+                    <!-- 只有管理员可见 -->
+                    <button id="add-vocab-btn" style="display:none;" class="admin-only">添加词汇</button>
+                    <button id="export-btn" style="display:none;" class="admin-only">导出CSV</button>
+                    <form id="import-form" style="display:none;" class="admin-only">
+                        <input type="file" id="import-file" accept=".csv">
+                        <button type="submit">导入CSV</button>
+                    </form>
+    
+                    <!-- 用户角色提示 -->
+                    <div id="user-role-hint"></div>
+                    
+                </div>
+                <table id="vocab-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>英文单词</th>
+                            <th>中文释义</th>
+                            <th>添加者</th>
+                            <th>添加时间</th>
+                            <th>操作                
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 词汇表格中的删除按钮 -->
+                               <td>
+                               <button class="delete-btn admin-only" data-id="${item.id}">删除</button>
+                               </td>
+                    </tbody>
+                </table>
+            </section>
+
+            <div id="add-vocab-modal" class="modal hidden">
+                <div class="modal-content">
+                    <span class="close-btn">&times;</span>
+                    <h2>添加新词汇</h2>
+                    <form id="add-vocab-form">
+                        <div class="form-group">
+                            <label for="word">英文单词:</label>
+                            <input type="text" id="word" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="definition">中文释义:</label>
+                            <textarea id="definition" required></textarea>
+                        </div>
+                        <button type="submit">添加</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

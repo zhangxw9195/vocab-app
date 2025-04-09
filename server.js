@@ -14,12 +14,48 @@ const port = 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({
+/* app.use(session({
     secret: 'vocab-secret-key',
     resave: false,
     saveUninitialized: true,
     cookie: { secure: false }
+})); */
+
+
+/* app.use(session({
+    secret: 'your-secret-key',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { 
+      maxAge: 24 * 60 * 60 * 1000 // 24小时
+    }
+  })); */
+
+
+/* */
+/* */
+/* */
+
+const cors = require('cors'); // 添加这行导入语句
+// 后端添加DELETE方法到CORS配置
+// 然后配置CORS
+app.use(cors({
+    origin: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true // 允许发送cookie
 }));
+
+app.use(session({
+    secret: 'vocab-secret-key',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { 
+        secure: false,
+        maxAge: 24 * 60 * 60 * 1000 // 24小时
+    }
+}));
+
 
 // 修改文件上传配置
 const upload = multer({ 
@@ -113,6 +149,8 @@ app.post('/api/logout', (req, res) => {
     });
 });
 
+
+
 // 获取当前用户
 app.get('/api/current-user', (req, res) => {
     //if (!req.session.user) {
@@ -156,20 +194,7 @@ app.route('/api/vocab')
         res.json({ success: true, item: newItem });
     });
 
-app.delete('/api/vocab/:id', requireAuth, (req, res) => {
-    const id = parseInt(req.params.id);
-    let vocab = JSON.parse(fs.readFileSync('data/vocab.json'));
 
-    const initialLength = vocab.length;
-    vocab = vocab.filter(item => item.id !== id);
-
-    if (vocab.length === initialLength) {
-        return res.status(404).json({ error: '未找到该词汇' });
-    }
-
-    fs.writeFileSync('data/vocab.json', JSON.stringify(vocab, null, 2));
-    res.json({ success: true });
-});
 
 // 导出词汇为CSV
 app.get('/api/vocab/export', requireAuth, (req, res) => {
@@ -244,16 +269,9 @@ app.post('/api/vocab/import', requireAuth, upload.single('file'), (req, res) => 
     }
 });
 
-// 处理前端路由
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
 
-// 错误处理
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).json({ error: '服务器错误' });
-});
+
+
 
 // 启动服务器
 app.listen(port, () => {
@@ -294,14 +312,6 @@ app.post('/api/vocab', requireAuth, (req, res) => {
     res.json({ success: true, item: newItem });
 });
 
-app.use(session({
-  secret: 'your-secret-key',
-  resave: false,
-  saveUninitialized: false,
-  cookie: { 
-    maxAge: 24 * 60 * 60 * 1000 // 24小时
-  }
-}));
 
 
 //
@@ -392,5 +402,104 @@ app.put('/:id', requireAuth, async (req, res) => {
         res.status(500).json({ error: '服务器内部错误' });
     }
 });
+
+
+/* */
+/* */
+/* */
+
+app.delete('/api/vocab/:id', requireAuth, (req, res) => {
+    const id = parseInt(req.params.id);
+    let vocab = JSON.parse(fs.readFileSync('data/vocab.json'));
+
+    const initialLength = vocab.length;
+    vocab = vocab.filter(item => item.id !== id);
+
+    if (vocab.length === initialLength) {
+        return res.status(404).json({ error: '未找到该词汇' });
+    }
+
+    fs.writeFileSync('data/vocab.json', JSON.stringify(vocab, null, 2));
+    res.json({ success: true });
+});
+
+
+
+// 在路由文件中添加
+// 后端路由示例 (Node.js/Express)
+/* app.delete('/api/vocab/all', requireAuth, async (req, res) => {
+    console.log('DELETE /api/vocab/all 请求到达'); // 调试日志
+    try {
+        // 检查用户权限
+        if (req.user.role !== 'admin') {
+            return res.status(403).json({ error: '无权执行此操作' });
+        }
+        
+        // 数据库方式删除
+        //await Vocab.deleteMany({});
+        
+        // 或文件系统方式
+        fs.writeFileSync('data/vocab.json', JSON.stringify([]));
+        
+        res.json({ success: true });
+    } catch (err) {
+        console.error('删除全部词汇错误:', err);
+        res.status(500).json({ error: '删除失败: ' + err.message });
+    }
+}); */
+
+
+// 全部删除词汇 (放在server.js的适当位置)
+/* app.delete('/api/vocab/all', requireAuth, (req, res) => {
+    console.log('DELETE /api/vocab/all 请求到达'); // 调试日志
+    // 检查用户权限
+    if (req.session.user.role !== 'admin') {
+        return res.status(403).json({ error: '无权执行此操作' });
+    }
+    
+    try {
+        // 清空词汇文件
+        fs.writeFileSync('data/vocab.json', JSON.stringify([]));
+        res.json({ success: true });
+    } catch (err) {
+        console.error('删除全部词汇错误:', err);
+        res.status(500).json({ error: '删除失败: ' + err.message });
+    }
+}); */
+
+
+// 后端
+app.post('/api/vocab/clear-all', requireAuth, (req, res) => {
+    console.log('DELETE /api/vocab/all 请求到达'); // 调试日志
+    // 检查用户权限
+    if (req.session.user.role !== 'admin') {
+        return res.status(403).json({ error: '无权执行此操作' });
+    }
+    
+    try {
+        // 清空词汇文件
+        fs.writeFileSync('data/vocab.json', JSON.stringify([]));
+        res.json({ success: true });
+    } catch (err) {
+        console.error('删除全部词汇错误:', err);
+        res.status(500).json({ error: '删除失败: ' + err.message });
+    }
+});
+
+
+
+// 处理前端路由
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+
+// 错误处理
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ error: '服务器错误' });
+});
+
+
 
 

@@ -21,5 +21,11 @@
     "username": "cccc",
     "password": "cccccc",
     "role": "user"
+  },
+  {
+    "id": 5,
+    "username": "dddd",
+    "password": "dddddd",
+    "role": "user"
   }
 ]

@@ -571,3 +571,16 @@ body.admin-mode .admin-only {
 #search-results.visible {
   display: block;
 }
+
+
+/* 20250408 */
+/* 全部删除按钮样式 */
+#delete-all-btn {
+    background-color: #d32f2f;
+    color: white;
+    margin-left: 10px;
+}
+
+#delete-all-btn:hover {
+    background-color: #b71c1c;
+}

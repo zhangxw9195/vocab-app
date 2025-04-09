@@ -1,60 +1,149 @@
 [
   {
-    "id": 2,
-    "word": "test",
-    "definition": "测试222",
+    "id": 1,
+    "word": "plug in type",
+    "definition": "插接件结构(插入式结构)",
     "createdBy": "admin",
-    "createdAt": "2025-03-28T08:16:28.713Z",
-    "updatedAt": "2025-04-07T08:23:13.152Z"
+    "createdAt": "2025-04-09T00:53:51.473Z"
+  },
+  {
+    "id": 2,
+    "word": "shim/wedge",
+    "definition": "垫铁",
+    "createdBy": "admin",
+    "createdAt": "2025-04-09T00:53:51.473Z"
   },
   {
     "id": 3,
-    "word": "apple",
-    "definition": "苹果",
+    "word": "harmonics wave voltage",
+    "definition": "谐波电压",
     "createdBy": "admin",
-    "createdAt": "2025-03-28T08:16:28.713Z"
+    "createdAt": "2025-04-09T00:53:51.473Z"
   },
   {
     "id": 4,
-    "word": "orange",
-    "definition": "橙子",
+    "word": "swab down",
+    "definition": "正包",
     "createdBy": "admin",
-    "createdAt": "2025-03-28T08:16:28.713Z"
+    "createdAt": "2025-04-09T00:53:51.473Z"
   },
   {
     "id": 5,
-    "word": "banana",
-    "definition": "香蕉",
+    "word": "tachometer device",
+    "definition": "测速装置",
     "createdBy": "admin",
-    "createdAt": "2025-03-28T08:16:28.713Z"
+    "createdAt": "2025-04-09T00:53:51.473Z"
   },
   {
     "id": 6,
-    "word": "good",
-    "definition": "很好",
+    "word": "air-discharging roller",
+    "definition": "排气装置",
     "createdBy": "admin",
-    "createdAt": "2025-03-31T01:53:51.171Z"
+    "createdAt": "2025-04-09T00:53:51.473Z"
   },
   {
     "id": 7,
-    "word": "bad",
-    "definition": "坏的",
+    "word": "no-return device",
+    "definition": "阻退装置",
     "createdBy": "admin",
-    "createdAt": "2025-03-31T05:17:42.063Z"
+    "createdAt": "2025-04-09T00:53:51.473Z"
   },
   {
     "id": 8,
-    "word": "HMI test",
-    "definition": "HMI测试1",
+    "word": "pivoting device",
+    "definition": "回转机构",
     "createdBy": "admin",
-    "createdAt": "2025/4/3 16:34:17",
-    "updatedAt": "2025-04-03T08:34:35.707Z"
+    "createdAt": "2025-04-09T00:53:51.473Z"
   },
   {
     "id": 9,
-    "word": "YES",
-    "definition": "是的",
+    "word": "bracket",
+    "definition": "托架",
     "createdBy": "admin",
-    "createdAt": "2025/4/7 09:55:13"
+    "createdAt": "2025-04-09T00:53:51.473Z"
+  },
+  {
+    "id": 10,
+    "word": "wind and applicator assembly",
+    "definition": "缠贴装置",
+    "createdBy": "admin",
+    "createdAt": "2025-04-09T00:53:51.473Z"
+  },
+  {
+    "id": 11,
+    "word": "edge guiding",
+    "definition": "防偏随动导辊组",
+    "createdBy": "admin",
+    "createdAt": "2025-04-09T00:53:51.473Z"
+  },
+  {
+    "id": 12,
+    "word": "sliding block",
+    "definition": "滑块",
+    "createdBy": "admin",
+    "createdAt": "2025-04-09T00:53:51.473Z"
+  },
+  {
+    "id": 13,
+    "word": "hinge support",
+    "definition": "铰接架",
+    "createdBy": "admin",
+    "createdAt": "2025-04-09T00:53:51.473Z"
+  },
+  {
+    "id": 14,
+    "word": "check bar",
+    "definition": "止退杆",
+    "createdBy": "admin",
+    "createdAt": "2025-04-09T00:53:51.473Z"
+  },
+  {
+    "id": 15,
+    "word": "unilateral no-return valve",
+    "definition": "单向止退阀",
+    "createdBy": "admin",
+    "createdAt": "2025-04-09T00:53:51.473Z"
+  },
+  {
+    "id": 16,
+    "word": "pushing cylinder",
+    "definition": "推胎气缸",
+    "createdBy": "admin",
+    "createdAt": "2025-04-09T00:53:51.473Z"
+  },
+  {
+    "id": 17,
+    "word": "brake motor",
+    "definition": "制动电机",
+    "createdBy": "admin",
+    "createdAt": "2025-04-09T00:53:51.473Z"
+  },
+  {
+    "id": 18,
+    "word": "spreading cylinder",
+    "definition": "扩胎气缸",
+    "createdBy": "admin",
+    "createdAt": "2025-04-09T00:53:51.473Z"
+  },
+  {
+    "id": 19,
+    "word": "main circuit breaker",
+    "definition": "主断路器",
+    "createdBy": "admin",
+    "createdAt": "2025-04-09T00:53:51.473Z"
+  },
+  {
+    "id": 20,
+    "word": "with encoder feedback for main motor",
+    "definition": "主电机转速码盘反馈",
+    "createdBy": "admin",
+    "createdAt": "2025-04-09T00:53:51.473Z"
+  },
+  {
+    "id": 21,
+    "word": "temperature regulation",
+    "definition": "温度调节",
+    "createdBy": "admin",
+    "createdAt": "2025-04-09T00:53:51.473Z"
   }
 ]

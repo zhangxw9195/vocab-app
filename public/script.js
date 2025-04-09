@@ -381,6 +381,8 @@ async function checkPermissions() {
         });
     }
 }*/
+
+
 // 在initPage函数中添加
 async function initPage() {
     const isAdmin = await checkPermissions();
@@ -555,8 +557,63 @@ async function updateUIForAdmin() {
   }
 }
 
+
+
+// 在DOMContentLoaded事件监听器中添加
+// 全部删除功能 (增强版)
+document.getElementById('delete-all-btn').addEventListener('click', async function() {
+    // 双重确认
+    const confirm1 = confirm('⚠️ 警告：这将永久删除所有词汇！建议删除之前先导出备份！');
+    if (!confirm1) return;
+    
+    const confirm2 = prompt('请输入"CONFIRM DELETE ALL"确认操作:');
+    if (confirm2 !== 'CONFIRM DELETE ALL') {
+        alert('操作已取消');
+        return;
+    }
+    
+    // 显示加载状态
+    const btn = this;
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span> 删除中...';
+    
+    try {
+        /* const response = await fetch('/api/vocab/all', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}` // 如果使用token认证
+            },
+            credentials: 'include' // 确保发送session cookie
+        }); */
+
+        //const response = await fetch(`/api/vocab/all`, { method: 'DELETE' });
+
+        // 前端
+        const response = await fetch('/api/vocab/clear-all', { method: 'POST' });
+        
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || '删除失败');
+        }
+        
+        // 刷新列表
+        await loadVocab();
+        alert('✅ 所有词汇已成功删除');
+    } catch (error) {
+        console.error('删除失败详情:', error);
+        alert(`删除失败: ${error.message}`);
+    } finally {
+        // 恢复按钮状态
+        btn.disabled = false;
+        btn.textContent = '全部删除';
+    }
+});
+
+
 // 页面加载和登录后都调用
 document.addEventListener('DOMContentLoaded', updateUIForAdmin);
 
 // 页面加载完成后初始化
 document.addEventListener('DOMContentLoaded', initPage);
+

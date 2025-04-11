@@ -1,6 +1,43 @@
+// 在登录成功处理中添加登录计数显示
+function handleLoginSuccess(data) {
+    // 保存用户数据和登录计数
+    localStorage.setItem('token', data.token);
+    localStorage.setItem('userData', JSON.stringify({
+        ...data.user,
+        loginCount: data.loginCount
+    }));
+    
+    // 更新UI
+    updateUserInfo();
+}
+
+// 添加更新用户信息的函数
+function updateUserInfo() {
+    const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+    const usernameElement = document.getElementById('username');
+    const loginCountElement = document.getElementById('login-count');
+    
+    if (usernameElement) {
+        usernameElement.textContent = userData.username || '';
+    }
+    
+    if (loginCountElement && userData.loginCount) {
+        loginCountElement.textContent = `您是第 ${userData.loginCount} 位登录用户`;
+    }
+}
+
+// 在页面加载时调用
+/* document.addEventListener('DOMContentLoaded', function() {
+    updateUserInfo();
+    // ...其他初始化代码...
+}); */
+
+
 document.addEventListener('DOMContentLoaded', async () => {
+    updateUserInfo();
+
     // 检查登录状态
-    async function checkAuth() {
+    /* async function checkAuth() {
         try {
             const response = await fetch('/api/current-user');
             if (!response.ok) {
@@ -10,6 +47,29 @@ document.addEventListener('DOMContentLoaded', async () => {
             
             const { user } = await response.json();
             document.getElementById('username').textContent = user.username;
+            return true;
+        } catch (error) {
+            window.location.href = '/login.html';
+            return false;
+        }
+    } */
+
+    async function checkAuth() {
+        try {
+            const response = await fetch('/api/current-user');
+            if (!response.ok) {
+                window.location.href = '/login.html';
+                return false;
+            }
+            
+            const { user, loginCount } = await response.json();
+            document.getElementById('username').textContent = user.username;
+            
+            // 更新登录计数
+            if (loginCount) {
+                document.getElementById('login-count').textContent = `您是第 ${loginCount} 位登录用户`;
+            }
+            
             return true;
         } catch (error) {
             window.location.href = '/login.html';

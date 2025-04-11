@@ -86,6 +86,14 @@ function initData() {
     if (!fs.existsSync('data/vocab.json')) {
         fs.writeFileSync('data/vocab.json', JSON.stringify([]));
     }
+
+    // 添加统计文件初始化
+    if (!fs.existsSync('data/stats.json')) {
+        fs.writeFileSync('data/stats.json', JSON.stringify({
+            totalLogins: 0,
+            vocabCount: 0
+        }));
+    }
 }
 initData();
 
@@ -121,7 +129,7 @@ app.post('/api/register', (req, res) => {
 });
 
 // 用户登录
-app.post('/api/login', (req, res) => {
+/* app.post('/api/login', (req, res) => {
     const { username, password } = req.body;
     const users = JSON.parse(fs.readFileSync('data/users.json'));
 
@@ -136,6 +144,31 @@ app.post('/api/login', (req, res) => {
         success: true, 
         username: user.username,
         role: user.role  // 添加角色信息
+    });
+}); */
+
+
+// 修改登录路由，增加登录计数
+app.post('/api/login', (req, res) => {
+    const { username, password } = req.body;
+    const users = JSON.parse(fs.readFileSync('data/users.json'));
+
+    const user = users.find(u => u.username === username && u.password === password);
+    if (!user) {
+        return res.status(401).json({ error: '用户名或密码错误' });
+    }
+
+    // 更新登录计数
+    const stats = JSON.parse(fs.readFileSync('data/stats.json'));
+    stats.totalLogins++;
+    fs.writeFileSync('data/stats.json', JSON.stringify(stats, null, 2));
+
+    req.session.user = user;
+    res.json({ 
+        success: true, 
+        username: user.username,
+        role: user.role,
+        loginCount: stats.totalLogins // 返回登录计数
     });
 });
 
@@ -152,7 +185,7 @@ app.post('/api/logout', (req, res) => {
 
 
 // 获取当前用户
-app.get('/api/current-user', (req, res) => {
+/* app.get('/api/current-user', (req, res) => {
     //if (!req.session.user) {
     //    return res.status(401).json({ error: '未登录' });
     //}
@@ -164,7 +197,25 @@ app.get('/api/current-user', (req, res) => {
             role: req.session.user.role
         }
     });
+}); */
+
+
+app.get('/api/current-user', (req, res) => {
+    if (!req.session.user) return res.status(401).json({ error: '未登录' });
+    
+    // 从 stats.json 读取 loginCount
+    const stats = JSON.parse(fs.readFileSync('data/stats.json'));
+    
+    res.json({ 
+        user: {
+            username: req.session.user.username,
+            role: req.session.user.role
+        },
+        loginCount: stats.totalLogins // 返回登录计数
+    });
 });
+
+
 
 // 词汇管理路由
 app.route('/api/vocab')
@@ -483,6 +534,24 @@ app.post('/api/vocab/clear-all', requireAuth, (req, res) => {
     } catch (err) {
         console.error('删除全部词汇错误:', err);
         res.status(500).json({ error: '删除失败: ' + err.message });
+    }
+});
+
+
+// 添加获取统计信息的API
+app.get('/api/stats', (req, res) => {
+    try {
+        const stats = JSON.parse(fs.readFileSync('data/stats.json'));
+        const vocab = JSON.parse(fs.readFileSync('data/vocab.json'));
+        
+        // 确保词汇计数是最新的
+        stats.vocabCount = vocab.length;
+        fs.writeFileSync('data/stats.json', JSON.stringify(stats, null, 2));
+        
+        res.json(stats);
+    } catch (error) {
+        console.error('获取统计信息失败:', error);
+        res.status(500).json({ error: '获取统计信息失败' });
     }
 });
 

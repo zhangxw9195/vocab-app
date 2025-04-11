@@ -62,6 +62,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                 `;
                 tbody.appendChild(row);
             });
+
+            // 更新词汇总数显示
+            updateVocabCount(vocab.length);
+
             // 确保在加载完成后应用权限控制
             async function initPage() {
                 const isAdmin = await checkPermissions();
@@ -73,6 +77,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         } catch (error) {
             console.error('加载词汇失败:', error);
             alert('加载词汇失败: ' + error.message);
+        }
+    }
+
+    // 添加更新词汇总数的函数
+    function updateVocabCount(count) {
+        const countElement = document.getElementById('vocab-count');
+        if (countElement) {
+            countElement.textContent = `(共 ${count} 条词汇)`;
         }
     }
 
@@ -384,7 +396,7 @@ async function checkPermissions() {
 
 
 // 在initPage函数中添加
-async function initPage() {
+/* async function initPage() {
     const isAdmin = await checkPermissions();
     console.log('管理员状态:', isAdmin); // 调试输出
     
@@ -395,7 +407,7 @@ async function initPage() {
     
     await loadVocab();
     await updateRoleHint();
-}
+} */
 
 // 页面加载完成后初始化
 //document.addEventListener('DOMContentLoaded', initPage);
@@ -469,6 +481,46 @@ async function loadVocab() {
         console.error('加载词汇失败:', error);
         alert('加载词汇失败: ' + error.message);
     }
+}
+
+
+// 在initPage函数中调用获取统计信息
+async function initPage() {
+    const isAdmin = await checkPermissions();
+    console.log('管理员状态:', isAdmin);
+    
+    if (isAdmin) {
+        document.body.classList.add('admin-mode');
+    }
+    
+    // 获取统计信息
+    try {
+        const statsResponse = await fetch('/api/stats');
+        if (statsResponse.ok) {
+            const stats = await statsResponse.json();
+            updateVocabCount(stats.vocabCount);
+        }
+    } catch (error) {
+        console.error('获取统计信息失败:', error);
+    }
+    
+    await loadVocab();
+    await updateRoleHint();
+}
+
+
+// 在initPage函数中添加
+async function initPage() {
+    const isAdmin = await checkPermissions();
+    console.log('管理员状态:', isAdmin); // 调试输出
+    
+    // 显示/隐藏管理按钮
+    document.querySelectorAll('.admin-only').forEach(el => {
+        el.style.display = isAdmin ? 'inline-block' : 'none'; // 修改为inline-block
+    });
+    
+    await loadVocab();
+    await updateRoleHint();
 }
 
 // 修改initPage函数

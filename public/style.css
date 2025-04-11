@@ -584,3 +584,20 @@ body.admin-mode .admin-only {
 #delete-all-btn:hover {
     background-color: #b71c1c;
 }
+
+
+/* 添加词汇总数样式 */
+#vocab-count {
+    font-size: 0.8em;
+    color: #666;
+    margin-left: 10px;
+    font-weight: normal;
+}
+
+/* 添加登录计数样式 */
+#login-count {
+    font-size: 0.9em;
+    color: #666;
+    margin-right: 10px;
+    font-style: italic;
+}

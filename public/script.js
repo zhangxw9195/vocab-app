@@ -16,6 +16,205 @@ function initAdminFeatures() {
     window.isAdmin = true;
 }
 
+// 修改initPage函数
+async function initPage() {
+    const isAdmin = await checkPermissions();
+    console.log('管理员状态:', isAdmin);
+    
+    if (isAdmin) {
+        document.body.classList.add('admin-mode');
+        // 只显示特定的管理元素
+        ['add-vocab-btn', 'export-btn', 'import-form'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                el.style.display = 'block';
+                console.log('显示元素:', id);
+            }
+        });
+    }
+
+    // 显示/隐藏管理按钮
+    document.querySelectorAll('.admin-only').forEach(el => {
+        el.style.display = isAdmin ? 'inline-block' : 'none'; // 修改为inline-block
+    });
+
+    // 确保先加载词汇再更新统计
+    await loadVocab();
+
+    // 获取统计信息
+    try {
+        const statsResponse = await fetch('/api/stats');
+        if (statsResponse.ok) {
+            const stats = await statsResponse.json();
+            updateVocabCount(stats.vocabCount);
+        }
+    } catch (error) {
+        console.error('获取统计信息失败:', error);
+    }
+    
+    //await loadVocab();
+    await updateRoleHint();
+}
+
+
+// 修改后的权限检查函数
+async function checkAndUpdateUI() {
+  try {
+    const response = await fetch('/api/current-user');
+    if (!response.ok) throw new Error('获取用户信息失败');
+    
+    const { user } = await response.json();
+    console.log('当前用户信息:', user); // 调试输出
+    
+    const isAdmin = user?.role === 'admin';
+    
+    // 显示/隐藏管理按钮
+    document.querySelectorAll('.admin-only').forEach(el => {
+      el.style.display = isAdmin ? 'block' : 'none';
+    });
+    
+    // 更新角色提示
+    const roleHint = document.getElementById('user-role-hint');
+    if (roleHint) {
+      roleHint.textContent = isAdmin ? '管理员模式' : '普通用户模式';
+      roleHint.className = isAdmin ? 'role-hint admin-hint' : 'role-hint user-hint';
+    }
+    
+    return isAdmin;
+  } catch (error) {
+    console.error('权限检查错误:', error);
+    return false;
+  }
+}
+
+
+async function updateUIForAdmin() {
+  try {
+    const response = await fetch('/api/current-user');
+    const { user } = await response.json();
+    
+    console.log('当前用户:', user); // 调试输出
+    
+    if (user?.role === 'admin') {
+      // 显示所有管理相关元素
+      document.querySelectorAll('.admin-only').forEach(el => {
+        el.style.display = 'block';
+        console.log('显示元素:', el.id); // 调试输出
+      });
+      
+      // 添加管理员样式
+      document.body.classList.add('admin-mode');
+    }
+  } catch (error) {
+    console.error('权限检查错误:', error);
+  }
+}
+
+// 在页面加载时检查权限
+async function checkPermissions() {
+    try {
+        const response = await fetch('/api/current-user');
+        if (!response.ok) return false;
+        
+        const { user } = await response.json();
+        return user.role === 'admin';
+    } catch (error) {
+        console.error('权限检查失败:', error);
+        return false;
+    }
+}
+
+//更新用户角色提示
+async function updateRoleHint() {
+    try {
+        const response = await fetch('/api/current-user');
+        if (!response.ok) return;
+        
+        const { user } = await response.json();
+        const hint = document.getElementById('user-role-hint');
+        
+        hint.textContent = user.role === 'admin' ? '管理员模式' : '普通用户模式';
+        hint.className = user.role === 'admin' ? 'role-admin' : 'role-user';
+    } catch (error) {
+        console.error('更新角色提示失败:', error);
+    }
+}
+
+// 浏览器兼容的Base64解码函数
+function safeBase64Decode(encodedStr) {
+    try {
+        // 浏览器环境使用atob + TextDecoder
+        const binaryStr = atob(encodedStr);
+        
+        // 方法1：使用TextDecoder（现代浏览器）
+        if (typeof TextDecoder !== 'undefined') {
+            const bytes = new Uint8Array(binaryStr.length);
+            for (let i = 0; i < binaryStr.length; i++) {
+                bytes[i] = binaryStr.charCodeAt(i);
+            }
+            return JSON.parse(new TextDecoder('utf-8').decode(bytes));
+        }
+        
+        // 方法2：兼容旧浏览器的方案
+        const decodedStr = decodeURIComponent(escape(binaryStr));
+        return JSON.parse(decodedStr);
+    } catch (e) {
+        console.error('解码失败:', e);
+        return []; // 返回空数组避免页面崩溃
+    }
+}
+
+// 修改loadVocab函数
+async function loadVocab() {
+    try {
+        const response = await fetch('/api/vocab');
+        if (!response.ok) throw new Error('加载失败');
+        
+        const result = await response.json();
+        
+        // 解码处理
+        //const vocabData = result.encoded ? JSON.parse(atob(result.data)) : result.data;
+        const vocabData = result.encoded ? safeBase64Decode(result.data) : result.data;
+        
+        const tbody = document.querySelector('#vocab-table tbody');
+        tbody.innerHTML = '';
+        
+        vocabData.forEach(item => {
+            // 保持原有渲染逻辑
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${item.id}</td>
+                <td>${item.word}</td>
+                <td>${item.definition}</td>
+                <td>${item.createdBy}</td>
+                <td>${new Date(item.createdAt).toLocaleString()}</td>
+                <td>
+                    <button class="edit-btn admin-only" data-id="${item.id}">编辑</button>
+                    <button class="save-btn admin-only" data-id="${item.id}" style="display:none;">保存</button>
+                    <button class="cancel-btn admin-only" data-id="${item.id}" style="display:none;">取消</button>
+                    <button class="delete-btn admin-only" data-id="${item.id}">删除</button>
+                </td>
+            `;
+            tbody.appendChild(row);
+        });
+
+        updateVocabCount(vocabData.length);
+    } catch (error) {
+        console.error('加载词汇失败:', error);
+        alert('加载词汇失败: ' + error.message);
+    }
+}
+
+
+// 添加更新词汇总数的函数
+function updateVocabCount(count) {
+    const countElement = document.getElementById('vocab-count');
+    if (countElement) {
+        countElement.textContent = `(共 ${count} 条词汇)`;
+    }
+}
+
+
 document.addEventListener('DOMContentLoaded', async () => {
     // 检查登录状态
     async function checkAuth() {
@@ -36,7 +235,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // 加载词汇列表
-    async function loadVocab() {
+    /* async function loadVocab() {
         try {
             const response = await fetch('/api/vocab');
             if (!response.ok) throw new Error('加载失败');
@@ -78,15 +277,24 @@ document.addEventListener('DOMContentLoaded', async () => {
             console.error('加载词汇失败:', error);
             alert('加载词汇失败: ' + error.message);
         }
-    }
-
-    // 添加更新词汇总数的函数
-    function updateVocabCount(count) {
-        const countElement = document.getElementById('vocab-count');
-        if (countElement) {
-            countElement.textContent = `(共 ${count} 条词汇)`;
+    } */
+    
+    //20250415
+    // 通用的Base64解码函数（解决中文乱码）
+    /* function safeBase64Decode(encodedStr) {
+        try {
+            // 将Base64转换为Buffer再转为UTF-8字符串
+            const buff = Buffer.from(encodedStr, 'base64');
+            return JSON.parse(buff.toString('utf8'));
+        } catch (e) {
+            console.error('解码失败:', e);
+            return [];
         }
-    }
+    } */
+
+    //
+
+    //
 
     // 初始化检查
     const isAuthenticated = await checkAuth();
@@ -355,19 +563,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 
-// 在页面加载时检查权限
-async function checkPermissions() {
-    try {
-        const response = await fetch('/api/current-user');
-        if (!response.ok) return false;
-        
-        const { user } = await response.json();
-        return user.role === 'admin';
-    } catch (error) {
-        console.error('权限检查失败:', error);
-        return false;
-    }
-}
+
 
 // 初始化页面时控制按钮显示
 /*async function initPage() {
@@ -412,21 +608,7 @@ async function checkPermissions() {
 // 页面加载完成后初始化
 //document.addEventListener('DOMContentLoaded', initPage);
 
-//更新用户角色提示
-async function updateRoleHint() {
-    try {
-        const response = await fetch('/api/current-user');
-        if (!response.ok) return;
-        
-        const { user } = await response.json();
-        const hint = document.getElementById('user-role-hint');
-        
-        hint.textContent = user.role === 'admin' ? '管理员模式' : '普通用户模式';
-        hint.className = user.role === 'admin' ? 'role-admin' : 'role-user';
-    } catch (error) {
-        console.error('更新角色提示失败:', error);
-    }
-}
+
 
 // 在initPage中调用
 /*async function initPage() {
@@ -450,8 +632,9 @@ async function updateRoleHint() {
     await updateRoleHint();
 }*/
 
-// 将loadVocab移到最外层
-async function loadVocab() {
+
+// 将loadVocab移到最外层   //////////////////////////////////20250415z注释
+/* async function loadVocab() {
     try {
         const response = await fetch('/api/vocab');
         if (!response.ok) throw new Error('加载失败');
@@ -481,11 +664,11 @@ async function loadVocab() {
         console.error('加载词汇失败:', error);
         alert('加载词汇失败: ' + error.message);
     }
-}
+} */
 
 
 // 在initPage函数中调用获取统计信息
-async function initPage() {
+/* async function initPage() {
     const isAdmin = await checkPermissions();
     console.log('管理员状态:', isAdmin);
     
@@ -506,11 +689,11 @@ async function initPage() {
     
     await loadVocab();
     await updateRoleHint();
-}
+} */
 
 
 // 在initPage函数中添加
-async function initPage() {
+/* async function initPage() {
     const isAdmin = await checkPermissions();
     console.log('管理员状态:', isAdmin); // 调试输出
     
@@ -521,93 +704,9 @@ async function initPage() {
     
     await loadVocab();
     await updateRoleHint();
-}
-
-// 修改initPage函数
-async function initPage() {
-    const isAdmin = await checkPermissions();
-    console.log('管理员状态:', isAdmin);
-    
-    if (isAdmin) {
-        document.body.classList.add('admin-mode');
-        // 只显示特定的管理元素
-        ['add-vocab-btn', 'export-btn', 'import-form'].forEach(id => {
-            const el = document.getElementById(id);
-            if (el) {
-                el.style.display = 'block';
-                console.log('显示元素:', id);
-            }
-        });
-    }
-    
-    await loadVocab();
-    await updateRoleHint();
-}
+} */
 
 
-// 修改后的权限检查函数
-async function checkAndUpdateUI() {
-  try {
-    const response = await fetch('/api/current-user');
-    if (!response.ok) throw new Error('获取用户信息失败');
-    
-    const { user } = await response.json();
-    console.log('当前用户信息:', user); // 调试输出
-    
-    const isAdmin = user?.role === 'admin';
-    
-    // 显示/隐藏管理按钮
-    document.querySelectorAll('.admin-only').forEach(el => {
-      el.style.display = isAdmin ? 'block' : 'none';
-    });
-    
-    // 更新角色提示
-    const roleHint = document.getElementById('user-role-hint');
-    if (roleHint) {
-      roleHint.textContent = isAdmin ? '管理员模式' : '普通用户模式';
-      roleHint.className = isAdmin ? 'role-hint admin-hint' : 'role-hint user-hint';
-    }
-    
-    return isAdmin;
-  } catch (error) {
-    console.error('权限检查错误:', error);
-    return false;
-  }
-}
-
-// 在页面加载时调用
-document.addEventListener('DOMContentLoaded', async () => {
-  const isAdmin = await checkAndUpdateUI();
-  console.log('是否是管理员:', isAdmin); // 调试输出
-  
-  if (isAdmin) {
-    // 初始化管理相关的事件监听
-    initAdminFeatures();
-  }
-});
-
-
-async function updateUIForAdmin() {
-  try {
-    const response = await fetch('/api/current-user');
-    const { user } = await response.json();
-    
-    console.log('当前用户:', user); // 调试输出
-    
-    if (user?.role === 'admin') {
-      // 显示所有管理相关元素
-      document.querySelectorAll('.admin-only').forEach(el => {
-        el.style.display = 'block';
-        console.log('显示元素:', el.id); // 调试输出
-      });
-      
-      // 添加管理员样式
-      document.body.classList.add('admin-mode');
-    }
-  } catch (error) {
-    console.error('权限检查错误:', error);
-  }
-}
 
 
 
@@ -662,6 +761,17 @@ document.getElementById('delete-all-btn').addEventListener('click', async functi
     }
 });
 
+
+// 在页面加载时调用
+document.addEventListener('DOMContentLoaded', async () => {
+    const isAdmin = await checkAndUpdateUI();
+    console.log('是否是管理员:', isAdmin); // 调试输出
+    
+    if (isAdmin) {
+      // 初始化管理相关的事件监听
+      initAdminFeatures();
+    }
+  });
 
 // 页面加载和登录后都调用
 document.addEventListener('DOMContentLoaded', updateUIForAdmin);

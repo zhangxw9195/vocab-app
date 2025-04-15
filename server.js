@@ -220,8 +220,25 @@ app.get('/api/current-user', (req, res) => {
 // 词汇管理路由
 app.route('/api/vocab')
     .get(requireAuth, (req, res) => {
-        const vocab = JSON.parse(fs.readFileSync('data/vocab.json'));
-        res.json(vocab);
+        /* const vocab = JSON.parse(fs.readFileSync('data/vocab.json'));
+        res.json(vocab); */
+        
+        try {
+            const vocab = JSON.parse(fs.readFileSync('data/vocab.json', 'utf8')); // 明确指定utf8
+            
+            // 修正编码方式 - 先转为UTF-8的Buffer再编码
+            const jsonString = JSON.stringify(vocab);
+            const encodedData = Buffer.from(jsonString, 'utf8').toString('base64');
+            
+            res.json({
+                encoded: true,
+                data: encodedData,
+                charset: 'utf-8' // 明确声明字符集
+            });
+        } catch (error) {
+            console.error('编码失败:', error);
+            res.status(500).json({ error: '数据编码失败' });
+        }
     })
     .post(requireAuth, (req, res) => {
         const { word, definition } = req.body;
@@ -555,6 +572,25 @@ app.get('/api/stats', (req, res) => {
     }
 });
 
+
+// 修改后的词汇获取路由
+// 修改 /api/vocab 路由
+/* app.get('/api/vocab', requireAuth, (req, res) => {
+    try {
+        const vocab = JSON.parse(fs.readFileSync('data/vocab.json'));
+        
+        // 统一返回结构：包含 encoded 字段表示是否编码
+        const responseData = {
+            encoded: true,
+            data: Buffer.from(JSON.stringify(vocab)).toString('base64')
+        };
+        
+        res.json(responseData);
+    } catch (error) {
+        console.error('获取词汇错误:', error);
+        res.status(500).json({ error: '获取词汇失败' });
+    }
+}); */
 
 
 // 处理前端路由

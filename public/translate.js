@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // 搜索词汇
-    async function searchVocab(query) {
+    /* async function searchVocab(query) {
         const searchInput = document.getElementById('search-input').value.trim();
         const resultContainer = document.getElementById('search-results');
         // 清空之前的结果
@@ -119,7 +119,86 @@ document.addEventListener('DOMContentLoaded', async () => {
             // 无结果时不显示区域
             resultContainer.classList.remove('visible');
         }
+    } */
+
+    //20250415
+    // 通用的Base64解码函数（解决中文乱码）
+    /* function safeBase64Decode(encodedStr) {
+        try {
+            // 将Base64转换为Buffer再转为UTF-8字符串
+            const buff = Buffer.from(encodedStr, 'base64');
+            return JSON.parse(buff.toString('utf8'));
+        } catch (e) {
+            console.error('解码失败:', e);
+            return [];
+        }
+    } */
+
+    // 浏览器兼容的Base64解码函数
+    function safeBase64Decode(encodedStr) {
+        try {
+            // 浏览器环境使用atob + TextDecoder
+            const binaryStr = atob(encodedStr);
+            
+            // 方法1：使用TextDecoder（现代浏览器）
+            if (typeof TextDecoder !== 'undefined') {
+                const bytes = new Uint8Array(binaryStr.length);
+                for (let i = 0; i < binaryStr.length; i++) {
+                    bytes[i] = binaryStr.charCodeAt(i);
+                }
+                return JSON.parse(new TextDecoder('utf-8').decode(bytes));
+            }
+            
+            // 方法2：兼容旧浏览器的方案
+            const decodedStr = decodeURIComponent(escape(binaryStr));
+            return JSON.parse(decodedStr);
+        } catch (e) {
+            console.error('解码失败:', e);
+            return []; // 返回空数组避免页面崩溃
+        }
     }
+
+    async function searchVocab(query) {
+        const searchInput = document.getElementById('search-input').value.trim();
+        const resultContainer = document.getElementById('search-results');
+        resultContainer.classList.remove('visible');
+    
+        if (!searchInput) return;
+    
+        try {
+            const response = await fetch('/api/vocab');
+            if (!response.ok) throw new Error('搜索失败');
+            
+            const result = await response.json();
+            
+            // 解码处理
+            //const vocabData = result.encoded ? JSON.parse(atob(result.data)) : result.data;
+            const vocabData = result.encoded ? safeBase64Decode(result.data) : result.data;
+            
+            const filtered = vocabData.filter(item => 
+                item.word.toLowerCase().includes(query.toLowerCase()) || 
+                item.definition.toLowerCase().includes(query.toLowerCase())
+            );
+            
+            const tbody = document.querySelector('#result-table tbody');
+            tbody.innerHTML = '';
+            
+            filtered.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.word}</td>
+                    <td>${item.definition}</td>
+                `;
+                tbody.appendChild(row);
+            });
+    
+            resultContainer.classList.add('visible');
+        } catch (error) {
+            console.error('搜索失败:', error);
+            resultContainer.classList.remove('visible');
+        }
+    }
+
 
     // 初始化检查
     const isAuthenticated = await checkAuth();

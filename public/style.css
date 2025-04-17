@@ -601,3 +601,96 @@ body.admin-mode .admin-only {
     margin-right: 10px;
     font-style: italic;
 }
+
+/********************************/
+/* 重复词汇提示模态框 */
+#duplicate-modal .modal-content {
+    max-width: 600px;
+}
+
+#duplicate-modal table {
+    width: 100%;
+    margin: 15px 0;
+    border-collapse: collapse;
+}
+
+#duplicate-modal table th, 
+#duplicate-modal table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+#duplicate-modal table th {
+    background-color: #f2f2f2;
+}
+
+.modal-actions {
+    text-align: right;
+    margin-top: 20px;
+}
+
+/* 添加到 style.css */
+tr.highlight {
+    animation: highlight 2s;
+}
+
+@keyframes highlight {
+    0% { background-color: #fff8e1; }
+    50% { background-color: #ffecb3; }
+    100% { background-color: #fff8e1; }
+}
+
+/**********************************************/
+/* 分页样式 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    gap: 5px;
+}
+
+.pagination button {
+    padding: 5px 10px;
+    min-width: 60px;
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.pagination button:hover:not(:disabled) {
+    background-color: #e0e0e0;
+}
+
+.pagination button:disabled {
+    color: #aaa;
+    cursor: not-allowed;
+}
+
+#page-numbers {
+    display: flex;
+    gap: 5px;
+}
+
+#page-numbers button {
+    min-width: 30px;
+}
+
+#page-numbers button.active {
+    background-color: #4CAF50;
+    color: white;
+    border-color: #4CAF50;
+}
+
+.page-info {
+    margin-left: 15px;
+    font-size: 14px;
+}
+
+#page-size {
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+}

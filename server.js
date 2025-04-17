@@ -240,7 +240,7 @@ app.route('/api/vocab')
             res.status(500).json({ error: '数据编码失败' });
         }
     })
-    .post(requireAuth, (req, res) => {
+    /* .post(requireAuth, (req, res) => {
         const { word, definition } = req.body;
         if (!word || !definition) {
             return res.status(400).json({ error: '单词和释义不能为空' });
@@ -260,7 +260,7 @@ app.route('/api/vocab')
         fs.writeFileSync('data/vocab.json', JSON.stringify(vocab, null, 2));
 
         res.json({ success: true, item: newItem });
-    });
+    }) */;
 
 
 
@@ -358,7 +358,7 @@ function getNextId(items) {
 }
 
 // 修改/api/vocab POST路由
-app.post('/api/vocab', requireAuth, (req, res) => {
+/* app.post('/api/vocab', requireAuth, (req, res) => {
     const { word, definition } = req.body;
     if (!word || !definition) {
         return res.status(400).json({ error: '单词和释义不能为空' });
@@ -378,6 +378,68 @@ app.post('/api/vocab', requireAuth, (req, res) => {
     fs.writeFileSync('data/vocab.json', JSON.stringify(vocab, null, 2));
 
     res.json({ success: true, item: newItem });
+}); */
+
+
+app.post('/api/vocab', requireAuth, (req, res) => {
+    const { word, definition } = req.body;
+    
+    if (!word || !definition) {
+        return res.status(400).json({ error: '单词和释义不能为空' });
+    }
+
+    try {
+        // 同步读取确保数据一致性
+        const vocab = JSON.parse(fs.readFileSync('data/vocab.json', 'utf8'));
+        
+        // 严格检查（不区分大小写和前后空格）
+        const normalizedWord = word.trim().toLowerCase();
+        const exists = vocab.some(item => 
+            item.word.trim().toLowerCase() === normalizedWord
+        );
+        
+        //console.log('Checking for duplicate:', normalizedWord, vocab.map(item => item.word));
+        
+        if (exists) {
+            
+            // 返回更详细的冲突信息
+            const existingItem = vocab.find(item => 
+                item.word.trim().toLowerCase() === normalizedWord
+            );
+            return res.status(409).json({ 
+                error: '词汇已存在',
+                existing: existingItem,
+                attempted: {
+                    word: word.trim(),
+                    definition: definition.trim()
+                }
+            });
+        }
+
+        // 创建新条目
+        const newItem = {
+            id: getNextId(vocab),
+            word: word.trim(),
+            definition: definition.trim(),
+            createdBy: req.session.user.username,
+            createdAt: new Date().toISOString()
+        };
+
+        // 同步写入确保数据一致性
+        const newVocab = [...vocab, newItem];
+        fs.writeFileSync('data/vocab.json', JSON.stringify(newVocab, null, 2));
+        
+        return res.json({ 
+            success: true, 
+            item: newItem
+        });
+    } catch (error) {
+        console.error('添加词汇失败:', error);
+        return res.status(500).json({ 
+            error: '添加词汇失败',
+            details: process.env.NODE_ENV === 'development' ? error.message : undefined
+        });
+    }
 });
 
 

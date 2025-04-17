@@ -1,3 +1,87 @@
+// 分页相关变量
+let currentPage = 1;
+let pageSize = 50; // 默认每页50条
+let totalVocabCount = 0;
+
+// Toast 提示函数
+function showToast(message, type = 'info') {
+    // 如果已经存在toast容器则复用
+    let toastContainer = document.getElementById('toast-container');
+    if (!toastContainer) {
+        toastContainer = document.createElement('div');
+        toastContainer.id = 'toast-container';
+        toastContainer.style.position = 'fixed';
+        toastContainer.style.bottom = '20px';
+        toastContainer.style.right = '20px';
+        toastContainer.style.zIndex = '1000';
+        document.body.appendChild(toastContainer);
+    }
+
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${type}`;
+    toast.innerHTML = `
+        <span>${message}</span>
+        <button class="toast-close">&times;</button>
+    `;
+    
+    // 添加关闭按钮事件
+    toast.querySelector('.toast-close').addEventListener('click', () => {
+        toast.remove();
+    });
+
+    toastContainer.appendChild(toast);
+    
+    // 自动消失
+    setTimeout(() => {
+        toast.classList.add('fade-out');
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
+
+// 添加CSS样式（如果尚未存在）
+if (!document.getElementById('toast-styles')) {
+    const style = document.createElement('style');
+    style.id = 'toast-styles';
+    style.textContent = `
+        .toast {
+            padding: 12px 24px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            min-width: 250px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideIn 0.3s forwards;
+        }
+        .toast-success { background-color: #4CAF50; }
+        .toast-error { background-color: #f44336; }
+        .toast-info { background-color: #2196F3; }
+        .toast-close {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            margin-left: 15px;
+        }
+        .fade-out {
+            animation: fadeOut 0.3s forwards;
+        }
+        @keyframes slideIn {
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes fadeOut {
+            to { opacity: 0; }
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+
 // 在 script.js 顶部添加以下函数定义
 function initAdminFeatures() {
     console.log("初始化管理员专属功能");
@@ -17,7 +101,7 @@ function initAdminFeatures() {
 }
 
 // 修改initPage函数
-async function initPage() {
+/* async function initPage() {
     const isAdmin = await checkPermissions();
     console.log('管理员状态:', isAdmin);
     
@@ -53,6 +137,39 @@ async function initPage() {
     }
     
     //await loadVocab();
+    await updateRoleHint();
+} */
+
+// 初始化页面
+async function initPage() {
+    const isAdmin = await checkPermissions();
+    console.log('管理员状态:', isAdmin);
+    
+    if (isAdmin) {
+        document.body.classList.add('admin-mode');
+        ['add-vocab-btn', 'export-btn', 'import-form', 'delete-all-btn'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                el.style.display = 'block';
+                console.log('显示元素:', id);
+            }
+        });
+    }
+
+    // 确保先加载词汇再更新统计
+    await loadVocab(1, pageSize); // 明确传递初始参数
+
+    // 获取统计信息
+    try {
+        const statsResponse = await fetch('/api/stats');
+        if (statsResponse.ok) {
+            const stats = await statsResponse.json();
+            updateVocabCount(stats.vocabCount);
+        }
+    } catch (error) {
+        console.error('获取统计信息失败:', error);
+    }
+    
     await updateRoleHint();
 }
 
@@ -164,8 +281,21 @@ function safeBase64Decode(encodedStr) {
     }
 }
 
-// 修改loadVocab函数
+
+/* // 在 loadVocab 中添加 data-word 属性便于查找
 async function loadVocab() {
+    // ...原有代码...
+    vocabData.forEach(item => {
+        const row = document.createElement('tr');
+        row.dataset.word = item.word.toLowerCase(); // 添加这个属性
+        // ...剩余代码...
+    });
+    // ...原有代码...
+} */
+
+
+// 修改loadVocab函数
+/* async function loadVocab() {
     try {
         const response = await fetch('/api/vocab');
         if (!response.ok) throw new Error('加载失败');
@@ -182,6 +312,7 @@ async function loadVocab() {
         vocabData.forEach(item => {
             // 保持原有渲染逻辑
             const row = document.createElement('tr');
+            row.dataset.word = item.word.toLowerCase(); // 添加这个属性
             row.innerHTML = `
                 <td>${item.id}</td>
                 <td>${item.word}</td>
@@ -199,9 +330,85 @@ async function loadVocab() {
         });
 
         updateVocabCount(vocabData.length);
+
+        // 分页处理
+        //const startIndex = (page - 1) * size;
+        //const paginatedData = vocabData.slice(startIndex, startIndex + size);
+        
+        //renderVocabTable(paginatedData);
+        //renderPaginationControls();
     } catch (error) {
         console.error('加载词汇失败:', error);
         alert('加载词汇失败: ' + error.message);
+    }
+} */
+
+// 加载词汇数据并分页显示
+/* async function loadVocab(page, size) {
+    // 如果没有提供参数，使用当前值
+    page = typeof page === 'undefined' ? currentPage : page;
+    size = typeof size === 'undefined' ? pageSize : size;
+    
+    try {
+        const response = await fetch('/api/vocab');
+        if (!response.ok) throw new Error('加载失败');
+        
+        const result = await response.json();
+        const vocabData = result.encoded ? safeBase64Decode(result.data) : result.data;
+        
+        // 更新总词汇数
+        totalVocabCount = vocabData.length;
+        updateVocabCount(totalVocabCount);
+        
+        // 分页处理
+        const startIndex = (page - 1) * size;
+        const paginatedData = vocabData.slice(startIndex, startIndex + size);
+        
+        renderVocabTable(paginatedData);
+        renderPaginationControls();
+        
+        // 更新当前页码和每页大小
+        currentPage = page;
+        pageSize = size;
+        
+    } catch (error) {
+        console.error('加载词汇失败:', error);
+        showToast('加载词汇失败: ' + error.message, 'error');
+    }
+} */
+
+async function loadVocab(page, size) {
+    // 如果没有提供参数，使用当前值
+    page = typeof page === 'undefined' ? currentPage : page;
+    size = typeof size === 'undefined' ? pageSize : size;
+    
+    try {
+        const response = await fetch('/api/vocab');
+        if (!response.ok) throw new Error('加载失败');
+        
+        const result = await response.json();
+        const vocabData = result.encoded ? safeBase64Decode(result.data) : result.data;
+        
+        // 更新总词汇数
+        totalVocabCount = vocabData.length;
+        updateVocabCount(totalVocabCount);
+        
+        // 分页处理
+        const startIndex = (page - 1) * size;
+        const paginatedData = vocabData.slice(startIndex, startIndex + size);
+        
+        renderVocabTable(paginatedData);
+        
+        // 更新当前页码和每页大小
+        currentPage = page;
+        pageSize = size;
+        
+        // 确保在数据加载后更新分页控件
+        renderPaginationControls();
+        
+    } catch (error) {
+        console.error('加载词汇失败:', error);
+        showToast('加载词汇失败: ' + error.message, 'error');
     }
 }
 
@@ -212,6 +419,183 @@ function updateVocabCount(count) {
     if (countElement) {
         countElement.textContent = `(共 ${count} 条词汇)`;
     }
+}
+
+// 单独渲染表格的函数
+function renderVocabTable(data) {
+    const tbody = document.querySelector('#vocab-table tbody');
+    tbody.innerHTML = '';
+    
+    data.forEach(item => {
+        const row = document.createElement('tr');
+        row.dataset.word = item.word.toLowerCase();
+        row.innerHTML = `
+            <td>${item.id}</td>
+            <td>${item.word}</td>
+            <td>${item.definition}</td>
+            <td>${item.createdBy}</td>
+            <td>${new Date(item.createdAt).toLocaleString()}</td>
+            <td>
+                <button class="edit-btn admin-only" data-id="${item.id}">编辑</button>
+                <button class="save-btn admin-only" data-id="${item.id}" style="display:none;">保存</button>
+                <button class="cancel-btn admin-only" data-id="${item.id}" style="display:none;">取消</button>
+                <button class="delete-btn admin-only" data-id="${item.id}">删除</button>
+            </td>
+        `;
+        tbody.appendChild(row);
+    });
+}
+
+// 渲染分页控件
+/* function renderPaginationControls() {
+    const totalPages = Math.ceil(totalVocabCount / pageSize);
+    const pageNumbers = document.getElementById('page-numbers');
+    pageNumbers.innerHTML = '';
+    
+    // 计算显示的页码范围 (最多显示5个页码)
+    let startPage = Math.max(1, currentPage - 2);
+    let endPage = Math.min(totalPages, currentPage + 2);
+    
+    // 确保显示5个页码（如果总数足够）
+    if (endPage - startPage < 4) {
+        if (currentPage < 3) {
+            endPage = Math.min(5, totalPages);
+        } else {
+            startPage = Math.max(1, endPage - 4);
+        }
+    }
+    
+    // 添加页码按钮
+    for (let i = startPage; i <= endPage; i++) {
+        const pageBtn = document.createElement('button');
+        pageBtn.textContent = i;
+        if (i === currentPage) {
+            pageBtn.classList.add('active');
+            pageBtn.disabled = true;
+        }
+        pageBtn.addEventListener('click', () => {
+            currentPage = i;
+            loadVocab();
+        });
+        pageNumbers.appendChild(pageBtn);
+    }
+    
+    // 更新导航按钮状态
+    document.getElementById('first-page').disabled = currentPage === 1;
+    document.getElementById('prev-page').disabled = currentPage === 1;
+    document.getElementById('next-page').disabled = currentPage === totalPages;
+    document.getElementById('last-page').disabled = currentPage === totalPages;
+    
+    // 添加首页/末页按钮的省略号
+    if (startPage > 1) {
+        const ellipsisStart = document.createElement('span');
+        ellipsisStart.textContent = '...';
+        pageNumbers.insertBefore(ellipsisStart, pageNumbers.firstChild);
+        
+        const firstBtn = document.createElement('button');
+        firstBtn.textContent = '1';
+        firstBtn.addEventListener('click', () => {
+            currentPage = 1;
+            loadVocab();
+        });
+        pageNumbers.insertBefore(firstBtn, pageNumbers.firstChild);
+    }
+    
+    if (endPage < totalPages) {
+        const ellipsisEnd = document.createElement('span');
+        ellipsisEnd.textContent = '...';
+        pageNumbers.appendChild(ellipsisEnd);
+        
+        const lastBtn = document.createElement('button');
+        lastBtn.textContent = totalPages;
+        lastBtn.addEventListener('click', () => {
+            currentPage = totalPages;
+            loadVocab();
+        });
+        pageNumbers.appendChild(lastBtn);
+    }
+} */
+
+function renderPaginationControls() {
+    const totalPages = Math.ceil(totalVocabCount / pageSize);
+    const pageNumbers = document.getElementById('page-numbers');
+    pageNumbers.innerHTML = '';
+    
+    // 确保当前页不超过总页数
+    if (currentPage > totalPages && totalPages > 0) {
+        currentPage = totalPages;
+        loadVocab(currentPage, pageSize);
+        return;
+    }
+    
+    // 计算显示的页码范围 (最多显示5个页码)
+    let startPage = Math.max(1, currentPage - 2);
+    let endPage = Math.min(totalPages, currentPage + 2);
+    
+    // 确保显示5个页码（如果总数足够）
+    if (endPage - startPage < 4) {
+        if (currentPage < 3) {
+            endPage = Math.min(5, totalPages);
+        } else {
+            startPage = Math.max(1, endPage - 4);
+        }
+    }
+    
+    // 添加页码按钮
+    for (let i = startPage; i <= endPage; i++) {
+        const pageBtn = document.createElement('button');
+        pageBtn.textContent = i;
+        if (i === currentPage) {
+            pageBtn.classList.add('active');
+            pageBtn.disabled = true;
+        }
+        pageBtn.addEventListener('click', () => {
+            currentPage = i;
+            loadVocab(i, pageSize);
+        });
+        pageNumbers.appendChild(pageBtn);
+    }
+    
+    // 更新导航按钮状态
+    document.getElementById('first-page').disabled = currentPage === 1;
+    document.getElementById('prev-page').disabled = currentPage === 1;
+    document.getElementById('next-page').disabled = currentPage === totalPages;
+    document.getElementById('last-page').disabled = currentPage === totalPages;
+    
+    // 添加首页/末页按钮的省略号
+    if (startPage > 1) {
+        const ellipsisStart = document.createElement('span');
+        ellipsisStart.textContent = '...';
+        pageNumbers.insertBefore(ellipsisStart, pageNumbers.firstChild);
+        
+        const firstBtn = document.createElement('button');
+        firstBtn.textContent = '1';
+        firstBtn.addEventListener('click', () => {
+            currentPage = 1;
+            loadVocab(1, pageSize);
+        });
+        pageNumbers.insertBefore(firstBtn, pageNumbers.firstChild);
+    }
+    
+    if (endPage < totalPages) {
+        const ellipsisEnd = document.createElement('span');
+        ellipsisEnd.textContent = '...';
+        pageNumbers.appendChild(ellipsisEnd);
+        
+        const lastBtn = document.createElement('button');
+        lastBtn.textContent = totalPages;
+        lastBtn.addEventListener('click', () => {
+            currentPage = totalPages;
+            loadVocab(totalPages, pageSize);
+        });
+        pageNumbers.appendChild(lastBtn);
+    }
+    
+    // 更新页面信息显示
+    const startItem = (currentPage - 1) * pageSize + 1;
+    const endItem = Math.min(currentPage * pageSize, totalVocabCount);
+    document.querySelector('.page-info').textContent = 
+        `显示 ${startItem}-${endItem} 条，共 ${totalVocabCount} 条`;
 }
 
 
@@ -343,7 +727,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
-    document.getElementById('add-vocab-form').addEventListener('submit', async (e) => {
+    /* document.getElementById('add-vocab-form').addEventListener('submit', async (e) => {
         e.preventDefault();
         const word = document.getElementById('word').value.trim();
         const definition = document.getElementById('definition').value.trim();
@@ -371,7 +755,66 @@ document.addEventListener('DOMContentLoaded', async () => {
         } catch (error) {
             alert('添加失败: ' + error.message);
         }
+    }); */
+
+    document.getElementById('add-vocab-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const word = form.word.value.trim();
+        const definition = form.definition.value.trim();
+    
+        if (!word || !definition) {
+            showToast('单词和释义不能为空', 'error');
+            return;
+        }
+    
+        try {
+            const response = await fetch('/api/vocab', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ word, definition })
+            });
+            
+            const result = await response.json();
+            
+            //console.log('Response status:', response.status, 'Data:', result);
+
+            if (response.status === 409) {
+                // 处理重复词汇
+                let message = `"${result.attempted.word}" 已存在\n\n`;
+                message += `现有记录：\n`;
+                message += `单词：${result.existing.word}\n`;
+                message += `释义：${result.existing.definition}\n`;
+                message += `添加者：${result.existing.createdBy}\n`;
+                message += `添加时间：${new Date(result.existing.createdAt).toLocaleString()}`;
+                
+                if (confirm(`${message}\n\n是否查看该词汇？`)) {
+                    const row = document.querySelector(`[data-word="${result.existing.word.toLowerCase()}"]`);
+                    if (row) {
+                        row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        row.classList.add('highlight');
+                        setTimeout(() => row.classList.remove('highlight'), 2000);
+                    }
+                }
+                return;
+            }
+            
+            if (!response.ok) {
+                throw new Error(result.error || '添加失败');
+            }
+            
+            // 成功处理
+            form.reset();
+            document.getElementById('add-vocab-modal').classList.add('hidden');
+            await loadVocab();
+            showToast(`"${result.item.word}" 添加成功`, 'success');
+        } catch (error) {
+            console.error('添加失败:', error);
+            showToast(`添加失败: ${error.message}`, 'error');
+        }
     });
+    
+    
 
     document.getElementById('export-btn').addEventListener('click', async () => {
         try {
@@ -393,52 +836,52 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     document.getElementById('import-form').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const fileInput = document.getElementById('import-file');
-    const importBtn = document.querySelector('#import-form button[type="submit"]');
-    
-    if (fileInput.files.length === 0) {
-        alert('请先选择CSV文件');
-        return;
-    }
-
-    // 验证文件类型
-    const file = fileInput.files[0];
-    if (!file.name.endsWith('.csv')) {
-        alert('请上传CSV格式的文件');
-        return;
-    }
-
-    // 显示加载状态
-    importBtn.disabled = true;
-    importBtn.innerHTML = '<span class="spinner"></span> 导入中...';
-
-    try {
-        const formData = new FormData();
-        formData.append('file', file);
-
-        const response = await fetch('/api/vocab/import', {
-            method: 'POST',
-            body: formData
-        });
-
-        const result = await response.json();
+        e.preventDefault();
+        const fileInput = document.getElementById('import-file');
+        const importBtn = document.querySelector('#import-form button[type="submit"]');
         
-        if (!response.ok) {
-            throw new Error(result.error || '导入失败');
+        if (fileInput.files.length === 0) {
+            alert('请先选择CSV文件');
+            return;
         }
 
-        alert(`成功导入 ${result.imported} 条词汇`);
-        fileInput.value = '';
-        await loadVocab();
-    } catch (error) {
-        console.error('导入错误:', error);
-        alert(`导入失败: ${error.message}`);
-    } finally {
-        importBtn.disabled = false;
-        importBtn.textContent = '导入CSV';
-    }
-});
+        // 验证文件类型
+        const file = fileInput.files[0];
+        if (!file.name.endsWith('.csv')) {
+            alert('请上传CSV格式的文件');
+            return;
+        }
+
+        // 显示加载状态
+        importBtn.disabled = true;
+        importBtn.innerHTML = '<span class="spinner"></span> 导入中...';
+
+        try {
+            const formData = new FormData();
+            formData.append('file', file);
+
+            const response = await fetch('/api/vocab/import', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+            
+            if (!response.ok) {
+                throw new Error(result.error || '导入失败');
+            }
+
+            alert(`成功导入 ${result.imported} 条词汇`);
+            fileInput.value = '';
+            await loadVocab();
+        } catch (error) {
+            console.error('导入错误:', error);
+            alert(`导入失败: ${error.message}`);
+        } finally {
+            importBtn.disabled = false;
+            importBtn.textContent = '导入CSV';
+        }
+    });
 
     document.getElementById('vocab-table').addEventListener('click', async (e) => {
         if (e.target.classList.contains('delete-btn')) {
@@ -560,6 +1003,48 @@ document.addEventListener('DOMContentLoaded', async () => {
             // ...原有删除逻辑...
         }
     });
+
+
+    //20250416
+    //
+    //
+    // 分页事件监听
+    // 初始化分页控件事件
+    document.getElementById('first-page').addEventListener('click', () => {
+        loadVocab(1, pageSize);
+    });
+    
+    document.getElementById('prev-page').addEventListener('click', () => {
+        if (currentPage > 1) {
+            loadVocab(currentPage - 1, pageSize);
+        }
+    });
+    
+    document.getElementById('next-page').addEventListener('click', () => {
+        const totalPages = Math.ceil(totalVocabCount / pageSize);
+        if (currentPage < totalPages) {
+            loadVocab(currentPage + 1, pageSize);
+        }
+    });
+    
+    document.getElementById('last-page').addEventListener('click', () => {
+        const totalPages = Math.ceil(totalVocabCount / pageSize);
+        loadVocab(totalPages, pageSize);
+    });
+    
+    /* document.getElementById('page-size').addEventListener('change', (e) => {
+        const newSize = parseInt(e.target.value);
+        loadVocab(1, newSize); // 重置到第一页并使用新的大小
+    }); */
+
+    document.getElementById('page-size').addEventListener('change', (e) => {
+        const newSize = parseInt(e.target.value);
+        pageSize = newSize; // 更新全局pageSize
+        loadVocab(1, newSize); // 重置到第一页并使用新的大小
+    });
+    
+    // 初始加载
+    await loadVocab(1, pageSize);
 });
 
 

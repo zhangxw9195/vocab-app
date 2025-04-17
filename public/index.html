@@ -63,6 +63,25 @@
                                </td>
                     </tbody>
                 </table>
+
+                <!-- 在表格后面添加分页控件 -->
+                <div class="pagination">
+                    <button id="first-page" disabled>首页</button>
+                    <button id="prev-page" disabled>上一页</button>
+                    <div id="page-numbers"></div>
+                    <button id="next-page" disabled>下一页</button>
+                    <button id="last-page" disabled>末页</button>
+                    <span class="page-info">显示 1-50 条，共 100 条</span>
+                    <span class="page-info">
+                        每页显示：
+                        <select id="page-size">
+                            <option value="10">10条</option>
+                            <option value="20">20条</option>
+                            <option value="50" selected>50条</option>
+                            <option value="100">100条</option>
+                        </select>
+                    </span>
+                </div>
             </section>
 
             <div id="add-vocab-modal" class="modal hidden">
@@ -83,6 +102,22 @@
                 </div>
             </div>
         </main>
+    </div>
+
+    <!-- 添加到body末尾 -->
+    <div id="duplicate-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn" onclick="document.getElementById('duplicate-modal').classList.add('hidden')">
+                &times;
+            </span>
+            <h3>词汇已存在</h3>
+            <div id="existing-info"></div>
+            <div class="modal-actions">
+                <button onclick="document.getElementById('duplicate-modal').classList.add('hidden')">
+                    关闭
+                </button>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>

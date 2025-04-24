@@ -20,8 +20,16 @@
         <main>
             <section id="vocab-section">
                 <h2>词汇管理</h2>
+                <!-- 新增搜索框和按钮 -->
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="输入单词或释义查询...">
+                    <button id="search-btn">查询</button>
+                    <button id="clear-search-btn">清除</button> 
+                </div>
+                <div></div>
+
                 <div class="actions">
-                   
+                    
                     <!-- 只有管理员可见 -->
                     <button id="add-vocab-btn" style="display:none;" class="admin-only">添加词汇</button>
                     <button id="export-btn" style="display:none;" class="admin-only">导出CSV</button>
@@ -40,7 +48,8 @@
                 <table id="vocab-table">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <!-- <th>ID</th> -->
+                            <th>序号</th>  <!-- 新增的序号列 -->
                             <th>英文单词</th>
                             <th>中文释义</th>
                             <th>添加者</th>

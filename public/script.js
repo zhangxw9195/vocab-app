@@ -1,3 +1,8 @@
+let sortedVocabData = []; // 新增全局变量存储排序后的完整数据
+
+// 在script.js顶部添加全局变量
+let currentSearchTerm = '';
+
 // 分页相关变量
 let currentPage = 1;
 let pageSize = 50; // 默认每页50条
@@ -100,45 +105,6 @@ function initAdminFeatures() {
     window.isAdmin = true;
 }
 
-// 修改initPage函数
-/* async function initPage() {
-    const isAdmin = await checkPermissions();
-    console.log('管理员状态:', isAdmin);
-    
-    if (isAdmin) {
-        document.body.classList.add('admin-mode');
-        // 只显示特定的管理元素
-        ['add-vocab-btn', 'export-btn', 'import-form'].forEach(id => {
-            const el = document.getElementById(id);
-            if (el) {
-                el.style.display = 'block';
-                console.log('显示元素:', id);
-            }
-        });
-    }
-
-    // 显示/隐藏管理按钮
-    document.querySelectorAll('.admin-only').forEach(el => {
-        el.style.display = isAdmin ? 'inline-block' : 'none'; // 修改为inline-block
-    });
-
-    // 确保先加载词汇再更新统计
-    await loadVocab();
-
-    // 获取统计信息
-    try {
-        const statsResponse = await fetch('/api/stats');
-        if (statsResponse.ok) {
-            const stats = await statsResponse.json();
-            updateVocabCount(stats.vocabCount);
-        }
-    } catch (error) {
-        console.error('获取统计信息失败:', error);
-    }
-    
-    //await loadVocab();
-    await updateRoleHint();
-} */
 
 // 初始化页面
 async function initPage() {
@@ -282,128 +248,51 @@ function safeBase64Decode(encodedStr) {
 }
 
 
-/* // 在 loadVocab 中添加 data-word 属性便于查找
-async function loadVocab() {
-    // ...原有代码...
-    vocabData.forEach(item => {
-        const row = document.createElement('tr');
-        row.dataset.word = item.word.toLowerCase(); // 添加这个属性
-        // ...剩余代码...
-    });
-    // ...原有代码...
-} */
-
-
-// 修改loadVocab函数
-/* async function loadVocab() {
-    try {
-        const response = await fetch('/api/vocab');
-        if (!response.ok) throw new Error('加载失败');
-        
-        const result = await response.json();
-        
-        // 解码处理
-        //const vocabData = result.encoded ? JSON.parse(atob(result.data)) : result.data;
-        const vocabData = result.encoded ? safeBase64Decode(result.data) : result.data;
-        
-        const tbody = document.querySelector('#vocab-table tbody');
-        tbody.innerHTML = '';
-        
-        vocabData.forEach(item => {
-            // 保持原有渲染逻辑
-            const row = document.createElement('tr');
-            row.dataset.word = item.word.toLowerCase(); // 添加这个属性
-            row.innerHTML = `
-                <td>${item.id}</td>
-                <td>${item.word}</td>
-                <td>${item.definition}</td>
-                <td>${item.createdBy}</td>
-                <td>${new Date(item.createdAt).toLocaleString()}</td>
-                <td>
-                    <button class="edit-btn admin-only" data-id="${item.id}">编辑</button>
-                    <button class="save-btn admin-only" data-id="${item.id}" style="display:none;">保存</button>
-                    <button class="cancel-btn admin-only" data-id="${item.id}" style="display:none;">取消</button>
-                    <button class="delete-btn admin-only" data-id="${item.id}">删除</button>
-                </td>
-            `;
-            tbody.appendChild(row);
-        });
-
-        updateVocabCount(vocabData.length);
-
-        // 分页处理
-        //const startIndex = (page - 1) * size;
-        //const paginatedData = vocabData.slice(startIndex, startIndex + size);
-        
-        //renderVocabTable(paginatedData);
-        //renderPaginationControls();
-    } catch (error) {
-        console.error('加载词汇失败:', error);
-        alert('加载词汇失败: ' + error.message);
-    }
-} */
-
+// 在 loadVocab 中添加 data-word 属性便于查找
 // 加载词汇数据并分页显示
-/* async function loadVocab(page, size) {
-    // 如果没有提供参数，使用当前值
-    page = typeof page === 'undefined' ? currentPage : page;
-    size = typeof size === 'undefined' ? pageSize : size;
-    
+async function loadVocab(page = currentPage, size = pageSize, searchTerm = currentSearchTerm, highlightId = null) {
     try {
         const response = await fetch('/api/vocab');
         if (!response.ok) throw new Error('加载失败');
         
         const result = await response.json();
-        const vocabData = result.encoded ? safeBase64Decode(result.data) : result.data;
+        let vocabData = result.encoded ? safeBase64Decode(result.data) : result.data;
+        
+        // 按字母顺序排序并存储到全局变量
+        sortedVocabData = [...vocabData].sort((a, b) => a.word.localeCompare(b.word));
+        
+        // 搜索过滤
+        if (searchTerm) {
+            const term = searchTerm.toLowerCase();
+            sortedVocabData = sortedVocabData.filter(item => 
+                item.word.toLowerCase().includes(term) || 
+                item.definition.toLowerCase().includes(term)
+            );
+        }
         
         // 更新总词汇数
-        totalVocabCount = vocabData.length;
+        totalVocabCount = sortedVocabData.length;
         updateVocabCount(totalVocabCount);
+        
+        // 查找需要高亮的项目所在的页码
+        if (highlightId) {
+            const itemIndex = sortedVocabData.findIndex(item => item.id === highlightId);
+            if (itemIndex >= 0) {
+                page = Math.floor(itemIndex / pageSize) + 1;
+            }
+        }
         
         // 分页处理
         const startIndex = (page - 1) * size;
-        const paginatedData = vocabData.slice(startIndex, startIndex + size);
+        const paginatedData = sortedVocabData.slice(startIndex, startIndex + size);
         
-        renderVocabTable(paginatedData);
-        renderPaginationControls();
+        // 渲染表格并传递高亮ID
+        renderVocabTable(paginatedData, highlightId);
         
-        // 更新当前页码和每页大小
+        // 更新当前页码
         currentPage = page;
-        pageSize = size;
         
-    } catch (error) {
-        console.error('加载词汇失败:', error);
-        showToast('加载词汇失败: ' + error.message, 'error');
-    }
-} */
-
-async function loadVocab(page, size) {
-    // 如果没有提供参数，使用当前值
-    page = typeof page === 'undefined' ? currentPage : page;
-    size = typeof size === 'undefined' ? pageSize : size;
-    
-    try {
-        const response = await fetch('/api/vocab');
-        if (!response.ok) throw new Error('加载失败');
-        
-        const result = await response.json();
-        const vocabData = result.encoded ? safeBase64Decode(result.data) : result.data;
-        
-        // 更新总词汇数
-        totalVocabCount = vocabData.length;
-        updateVocabCount(totalVocabCount);
-        
-        // 分页处理
-        const startIndex = (page - 1) * size;
-        const paginatedData = vocabData.slice(startIndex, startIndex + size);
-        
-        renderVocabTable(paginatedData);
-        
-        // 更新当前页码和每页大小
-        currentPage = page;
-        pageSize = size;
-        
-        // 确保在数据加载后更新分页控件
+        // 渲染分页控件
         renderPaginationControls();
         
     } catch (error) {
@@ -411,6 +300,7 @@ async function loadVocab(page, size) {
         showToast('加载词汇失败: ' + error.message, 'error');
     }
 }
+
 
 
 // 添加更新词汇总数的函数
@@ -422,15 +312,19 @@ function updateVocabCount(count) {
 }
 
 // 单独渲染表格的函数
-function renderVocabTable(data) {
+function renderVocabTable(data, highlightId = null) {
     const tbody = document.querySelector('#vocab-table tbody');
     tbody.innerHTML = '';
     
-    data.forEach(item => {
+    data.forEach((item, index) => {
+        // 查找当前项目在全局排序后的位置
+        const globalIndex = sortedVocabData.findIndex(v => v.id === item.id);
+        const rowNumber = globalIndex >= 0 ? globalIndex + 1 : (currentPage - 1) * pageSize + index + 1;
+        
         const row = document.createElement('tr');
-        row.dataset.word = item.word.toLowerCase();
+        row.dataset.id = item.id;
         row.innerHTML = `
-            <td>${item.id}</td>
+            <td>${rowNumber}</td>
             <td>${item.word}</td>
             <td>${item.definition}</td>
             <td>${item.createdBy}</td>
@@ -442,80 +336,19 @@ function renderVocabTable(data) {
                 <button class="delete-btn admin-only" data-id="${item.id}">删除</button>
             </td>
         `;
+        
+        // 高亮显示
+        if (highlightId && item.id === highlightId) {
+            row.classList.add('highlight');
+            setTimeout(() => row.classList.remove('highlight'), 2000);
+        }
+        
         tbody.appendChild(row);
     });
 }
 
-// 渲染分页控件
-/* function renderPaginationControls() {
-    const totalPages = Math.ceil(totalVocabCount / pageSize);
-    const pageNumbers = document.getElementById('page-numbers');
-    pageNumbers.innerHTML = '';
-    
-    // 计算显示的页码范围 (最多显示5个页码)
-    let startPage = Math.max(1, currentPage - 2);
-    let endPage = Math.min(totalPages, currentPage + 2);
-    
-    // 确保显示5个页码（如果总数足够）
-    if (endPage - startPage < 4) {
-        if (currentPage < 3) {
-            endPage = Math.min(5, totalPages);
-        } else {
-            startPage = Math.max(1, endPage - 4);
-        }
-    }
-    
-    // 添加页码按钮
-    for (let i = startPage; i <= endPage; i++) {
-        const pageBtn = document.createElement('button');
-        pageBtn.textContent = i;
-        if (i === currentPage) {
-            pageBtn.classList.add('active');
-            pageBtn.disabled = true;
-        }
-        pageBtn.addEventListener('click', () => {
-            currentPage = i;
-            loadVocab();
-        });
-        pageNumbers.appendChild(pageBtn);
-    }
-    
-    // 更新导航按钮状态
-    document.getElementById('first-page').disabled = currentPage === 1;
-    document.getElementById('prev-page').disabled = currentPage === 1;
-    document.getElementById('next-page').disabled = currentPage === totalPages;
-    document.getElementById('last-page').disabled = currentPage === totalPages;
-    
-    // 添加首页/末页按钮的省略号
-    if (startPage > 1) {
-        const ellipsisStart = document.createElement('span');
-        ellipsisStart.textContent = '...';
-        pageNumbers.insertBefore(ellipsisStart, pageNumbers.firstChild);
-        
-        const firstBtn = document.createElement('button');
-        firstBtn.textContent = '1';
-        firstBtn.addEventListener('click', () => {
-            currentPage = 1;
-            loadVocab();
-        });
-        pageNumbers.insertBefore(firstBtn, pageNumbers.firstChild);
-    }
-    
-    if (endPage < totalPages) {
-        const ellipsisEnd = document.createElement('span');
-        ellipsisEnd.textContent = '...';
-        pageNumbers.appendChild(ellipsisEnd);
-        
-        const lastBtn = document.createElement('button');
-        lastBtn.textContent = totalPages;
-        lastBtn.addEventListener('click', () => {
-            currentPage = totalPages;
-            loadVocab();
-        });
-        pageNumbers.appendChild(lastBtn);
-    }
-} */
 
+// 渲染分页控件
 function renderPaginationControls() {
     const totalPages = Math.ceil(totalVocabCount / pageSize);
     const pageNumbers = document.getElementById('page-numbers');
@@ -524,15 +357,15 @@ function renderPaginationControls() {
     // 确保当前页不超过总页数
     if (currentPage > totalPages && totalPages > 0) {
         currentPage = totalPages;
-        loadVocab(currentPage, pageSize);
+        loadVocab(currentPage, pageSize, currentSearchTerm);
         return;
     }
     
-    // 计算显示的页码范围 (最多显示5个页码)
+    // 计算显示的页码范围
     let startPage = Math.max(1, currentPage - 2);
     let endPage = Math.min(totalPages, currentPage + 2);
     
-    // 确保显示5个页码（如果总数足够）
+    // 确保显示5个页码
     if (endPage - startPage < 4) {
         if (currentPage < 3) {
             endPage = Math.min(5, totalPages);
@@ -550,8 +383,7 @@ function renderPaginationControls() {
             pageBtn.disabled = true;
         }
         pageBtn.addEventListener('click', () => {
-            currentPage = i;
-            loadVocab(i, pageSize);
+            loadVocab(i, pageSize, currentSearchTerm);
         });
         pageNumbers.appendChild(pageBtn);
     }
@@ -559,40 +391,11 @@ function renderPaginationControls() {
     // 更新导航按钮状态
     document.getElementById('first-page').disabled = currentPage === 1;
     document.getElementById('prev-page').disabled = currentPage === 1;
-    document.getElementById('next-page').disabled = currentPage === totalPages;
-    document.getElementById('last-page').disabled = currentPage === totalPages;
-    
-    // 添加首页/末页按钮的省略号
-    if (startPage > 1) {
-        const ellipsisStart = document.createElement('span');
-        ellipsisStart.textContent = '...';
-        pageNumbers.insertBefore(ellipsisStart, pageNumbers.firstChild);
-        
-        const firstBtn = document.createElement('button');
-        firstBtn.textContent = '1';
-        firstBtn.addEventListener('click', () => {
-            currentPage = 1;
-            loadVocab(1, pageSize);
-        });
-        pageNumbers.insertBefore(firstBtn, pageNumbers.firstChild);
-    }
-    
-    if (endPage < totalPages) {
-        const ellipsisEnd = document.createElement('span');
-        ellipsisEnd.textContent = '...';
-        pageNumbers.appendChild(ellipsisEnd);
-        
-        const lastBtn = document.createElement('button');
-        lastBtn.textContent = totalPages;
-        lastBtn.addEventListener('click', () => {
-            currentPage = totalPages;
-            loadVocab(totalPages, pageSize);
-        });
-        pageNumbers.appendChild(lastBtn);
-    }
+    document.getElementById('next-page').disabled = currentPage === totalPages || totalPages === 0;
+    document.getElementById('last-page').disabled = currentPage === totalPages || totalPages === 0;
     
     // 更新页面信息显示
-    const startItem = (currentPage - 1) * pageSize + 1;
+    const startItem = totalVocabCount > 0 ? (currentPage - 1) * pageSize + 1 : 0;
     const endItem = Math.min(currentPage * pageSize, totalVocabCount);
     document.querySelector('.page-info').textContent = 
         `显示 ${startItem}-${endItem} 条，共 ${totalVocabCount} 条`;
@@ -618,50 +421,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
-    // 加载词汇列表
-    /* async function loadVocab() {
-        try {
-            const response = await fetch('/api/vocab');
-            if (!response.ok) throw new Error('加载失败');
-            
-            const vocab = await response.json();
-            const tbody = document.querySelector('#vocab-table tbody');
-            tbody.innerHTML = '';
-            
-            vocab.forEach(item => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${item.id}</td>
-                    <td>${item.word}</td>
-                    <td>${item.definition}</td>
-                    <td>${item.createdBy}</td>
-                    <td>${new Date(item.createdAt).toLocaleString()}</td>
-                    <td>
-                        <button class="edit-btn admin-only" data-id="${item.id}">编辑</button>
-                        <button class="save-btn admin-only" data-id="${item.id}" style="display:none;">保存</button>
-                        <button class="cancel-btn admin-only" data-id="${item.id}" style="display:none;">取消</button>
-                        <button class="delete-btn admin-only" data-id="${item.id}">删除</button>
-                    </td>
-                `;
-                tbody.appendChild(row);
-            });
-
-            // 更新词汇总数显示
-            updateVocabCount(vocab.length);
-
-            // 确保在加载完成后应用权限控制
-            async function initPage() {
-                const isAdmin = await checkPermissions();
-                if (isAdmin) {
-                    document.body.classList.add('admin-mode');
-                }
-                await loadVocab();
-            }
-        } catch (error) {
-            console.error('加载词汇失败:', error);
-            alert('加载词汇失败: ' + error.message);
-        }
-    } */
     
     //20250415
     // 通用的Base64解码函数（解决中文乱码）
@@ -676,9 +435,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     } */
 
-    //
-
-    //
+    
 
     // 初始化检查
     const isAuthenticated = await checkAuth();
@@ -727,36 +484,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
-    /* document.getElementById('add-vocab-form').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const word = document.getElementById('word').value.trim();
-        const definition = document.getElementById('definition').value.trim();
-
-        if (!word || !definition) {
-            alert('单词和释义不能为空');
-            return;
-        }
-
-        try {
-            const response = await fetch('/api/vocab', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ word, definition })
-            });
-            
-            if (!response.ok) {
-                const error = await response.json();
-                throw new Error(error.error || '添加失败');
-            }
-            
-            document.getElementById('add-vocab-modal').classList.add('hidden');
-            document.getElementById('add-vocab-form').reset();
-            await loadVocab();
-        } catch (error) {
-            alert('添加失败: ' + error.message);
-        }
-    }); */
-
+    
     document.getElementById('add-vocab-form').addEventListener('submit', async (e) => {
         e.preventDefault();
         const form = e.target;
@@ -777,11 +505,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             
             const result = await response.json();
             
-            //console.log('Response status:', response.status, 'Data:', result);
-
             if (response.status === 409) {
                 // 处理重复词汇
-                let message = `"${result.attempted.word}" 已存在\n\n`;
+                let message = `"${result.attempted.word}" 已存在 (ID: ${result.existing.id})\n\n`;
                 message += `现有记录：\n`;
                 message += `单词：${result.existing.word}\n`;
                 message += `释义：${result.existing.definition}\n`;
@@ -789,11 +515,13 @@ document.addEventListener('DOMContentLoaded', async () => {
                 message += `添加时间：${new Date(result.existing.createdAt).toLocaleString()}`;
                 
                 if (confirm(`${message}\n\n是否查看该词汇？`)) {
-                    const row = document.querySelector(`[data-word="${result.existing.word.toLowerCase()}"]`);
+                    // 重新加载数据并高亮显示
+                    await loadVocab(currentPage, pageSize, '', result.existing.id);
+                    
+                    // 滚动到该行
+                    const row = document.querySelector(`tr[data-id="${result.existing.id}"]`);
                     if (row) {
                         row.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        row.classList.add('highlight');
-                        setTimeout(() => row.classList.remove('highlight'), 2000);
                     }
                 }
                 return;
@@ -802,18 +530,17 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (!response.ok) {
                 throw new Error(result.error || '添加失败');
             }
-            
+
             // 成功处理
             form.reset();
             document.getElementById('add-vocab-modal').classList.add('hidden');
-            await loadVocab();
+            await loadVocab(currentPage, pageSize, currentSearchTerm); // 保持当前页和搜索条件
             showToast(`"${result.item.word}" 添加成功`, 'success');
         } catch (error) {
             console.error('添加失败:', error);
             showToast(`添加失败: ${error.message}`, 'error');
         }
     });
-    
     
 
     document.getElementById('export-btn').addEventListener('click', async () => {
@@ -883,6 +610,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
+
+    // 在删除词汇的函数中
     document.getElementById('vocab-table').addEventListener('click', async (e) => {
         if (e.target.classList.contains('delete-btn')) {
             const id = e.target.dataset.id;
@@ -890,7 +619,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 try {
                     const response = await fetch(`/api/vocab/${id}`, { method: 'DELETE' });
                     if (!response.ok) throw new Error('删除失败');
-                    await loadVocab();
+                    await loadVocab(currentPage, pageSize, currentSearchTerm); // 保持当前页和搜索条件
                 } catch (error) {
                     alert('删除失败: ' + error.message);
                 }
@@ -1005,193 +734,71 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
 
-    //20250416
-    //
-    //
-    // 分页事件监听
-    // 初始化分页控件事件
+    //20250424---------------------------------------------
+    // 分页按钮事件监听
+    // 分页按钮事件监听
     document.getElementById('first-page').addEventListener('click', () => {
-        loadVocab(1, pageSize);
+        loadVocab(1, pageSize, currentSearchTerm);
     });
-    
+
     document.getElementById('prev-page').addEventListener('click', () => {
         if (currentPage > 1) {
-            loadVocab(currentPage - 1, pageSize);
+            loadVocab(currentPage - 1, pageSize, currentSearchTerm);
         }
     });
-    
+
     document.getElementById('next-page').addEventListener('click', () => {
         const totalPages = Math.ceil(totalVocabCount / pageSize);
         if (currentPage < totalPages) {
-            loadVocab(currentPage + 1, pageSize);
+            loadVocab(currentPage + 1, pageSize, currentSearchTerm);
         }
     });
-    
+
     document.getElementById('last-page').addEventListener('click', () => {
         const totalPages = Math.ceil(totalVocabCount / pageSize);
-        loadVocab(totalPages, pageSize);
+        loadVocab(totalPages, pageSize, currentSearchTerm);
     });
-    
-    /* document.getElementById('page-size').addEventListener('change', (e) => {
-        const newSize = parseInt(e.target.value);
-        loadVocab(1, newSize); // 重置到第一页并使用新的大小
-    }); */
 
+    // 每页数量变化事件
     document.getElementById('page-size').addEventListener('change', (e) => {
         const newSize = parseInt(e.target.value);
-        pageSize = newSize; // 更新全局pageSize
-        loadVocab(1, newSize); // 重置到第一页并使用新的大小
+        pageSize = newSize;
+        loadVocab(1, newSize, currentSearchTerm); // 重置到第一页
+    });
+
+    // 搜索功能
+    document.getElementById('search-btn').addEventListener('click', () => {
+        currentSearchTerm = document.getElementById('search-input').value.trim();
+        loadVocab(1, pageSize, currentSearchTerm); // 搜索时重置到第一页
+    });
+
+    // 清除搜索
+    document.getElementById('clear-search-btn').addEventListener('click', () => {
+        document.getElementById('search-input').value = '';
+        currentSearchTerm = '';
+        loadVocab(1, pageSize); // 清除搜索后重置到第一页
+    });
+
+    // 回车键搜索
+    document.getElementById('search-input').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            currentSearchTerm = e.target.value.trim();
+            loadVocab(1, pageSize, currentSearchTerm);
+        }
     });
     
     // 初始加载
     await loadVocab(1, pageSize);
+
+    //--------------------------------------------------
+    const isAdmin = await checkAndUpdateUI();
+    console.log('是否是管理员:', isAdmin); // 调试输出
+    
+    if (isAdmin) {
+      // 初始化管理相关的事件监听
+      initAdminFeatures();
+    }
 });
-
-
-
-
-// 初始化页面时控制按钮显示
-/*async function initPage() {
-    const isAdmin = await checkPermissions();
-    
-    // 获取所有管理按钮
-    const manageButtons = [
-        'add-vocab-btn',    // 添加按钮
-        'export-btn',       // 导出按钮
-        'import-form',      // 导入表单
-        'vocab-manage-tab'  // 词汇管理标签页
-    ].map(id => document.getElementById(id));
-    
-    // 设置显示/隐藏
-    manageButtons.forEach(btn => {
-        if (btn) btn.style.display = isAdmin ? 'block' : 'none';
-    });
-    
-    // 如果是普通用户，移除删除按钮
-    if (!isAdmin) {
-        document.querySelectorAll('.delete-btn').forEach(btn => {
-            btn.remove();
-        });
-    }
-}*/
-
-
-// 在initPage函数中添加
-/* async function initPage() {
-    const isAdmin = await checkPermissions();
-    console.log('管理员状态:', isAdmin); // 调试输出
-    
-    // 显示/隐藏管理按钮
-    document.querySelectorAll('.admin-only').forEach(el => {
-        el.style.display = isAdmin ? 'inline-block' : 'none'; // 修改为inline-block
-    });
-    
-    await loadVocab();
-    await updateRoleHint();
-} */
-
-// 页面加载完成后初始化
-//document.addEventListener('DOMContentLoaded', initPage);
-
-
-
-// 在initPage中调用
-/*async function initPage() {
-    // ...原有代码...
-    await updateRoleHint();
-}*/
-// 修改initPage函数
-/*async function initPage() {
-    const isAdmin = await checkPermissions();
-    console.log('管理员状态:', isAdmin);
-    
-    if (isAdmin) {
-        document.body.classList.add('admin-mode');
-        // 确保初始只显示编辑和删除按钮
-        document.querySelectorAll('.edit-btn, .delete-btn').forEach(btn => {
-            btn.style.display = 'inline-block';
-        });
-    }
-    
-    await loadVocab();
-    await updateRoleHint();
-}*/
-
-
-// 将loadVocab移到最外层   //////////////////////////////////20250415z注释
-/* async function loadVocab() {
-    try {
-        const response = await fetch('/api/vocab');
-        if (!response.ok) throw new Error('加载失败');
-        
-        const vocab = await response.json();
-        const tbody = document.querySelector('#vocab-table tbody');
-        tbody.innerHTML = '';
-        
-        vocab.forEach(item => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${item.id}</td>
-                <td>${item.word}</td>
-                <td>${item.definition}</td>
-                <td>${item.createdBy}</td>
-                <td>${new Date(item.createdAt).toLocaleString()}</td>
-                <td>
-                    <button class="edit-btn admin-only" data-id="${item.id}">编辑</button>
-                    <button class="save-btn admin-only" data-id="${item.id}" style="display:none">保存</button>
-                    <button class="cancel-btn admin-only" data-id="${item.id}" style="display:none">取消</button>
-                    <button class="delete-btn admin-only" data-id="${item.id}">删除</button>
-                </td>
-            `;
-            tbody.appendChild(row);
-        });
-    } catch (error) {
-        console.error('加载词汇失败:', error);
-        alert('加载词汇失败: ' + error.message);
-    }
-} */
-
-
-// 在initPage函数中调用获取统计信息
-/* async function initPage() {
-    const isAdmin = await checkPermissions();
-    console.log('管理员状态:', isAdmin);
-    
-    if (isAdmin) {
-        document.body.classList.add('admin-mode');
-    }
-    
-    // 获取统计信息
-    try {
-        const statsResponse = await fetch('/api/stats');
-        if (statsResponse.ok) {
-            const stats = await statsResponse.json();
-            updateVocabCount(stats.vocabCount);
-        }
-    } catch (error) {
-        console.error('获取统计信息失败:', error);
-    }
-    
-    await loadVocab();
-    await updateRoleHint();
-} */
-
-
-// 在initPage函数中添加
-/* async function initPage() {
-    const isAdmin = await checkPermissions();
-    console.log('管理员状态:', isAdmin); // 调试输出
-    
-    // 显示/隐藏管理按钮
-    document.querySelectorAll('.admin-only').forEach(el => {
-        el.style.display = isAdmin ? 'inline-block' : 'none'; // 修改为inline-block
-    });
-    
-    await loadVocab();
-    await updateRoleHint();
-} */
-
-
 
 
 
@@ -1247,16 +854,6 @@ document.getElementById('delete-all-btn').addEventListener('click', async functi
 });
 
 
-// 在页面加载时调用
-document.addEventListener('DOMContentLoaded', async () => {
-    const isAdmin = await checkAndUpdateUI();
-    console.log('是否是管理员:', isAdmin); // 调试输出
-    
-    if (isAdmin) {
-      // 初始化管理相关的事件监听
-      initAdminFeatures();
-    }
-  });
 
 // 页面加载和登录后都调用
 document.addEventListener('DOMContentLoaded', updateUIForAdmin);

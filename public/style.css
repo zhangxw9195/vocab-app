@@ -89,6 +89,7 @@ tr:hover {
     display: flex;
     gap: 10px;
     margin-bottom: 20px;
+    /* width: 100%; */
 }
 
 /* 模态框 */
@@ -290,6 +291,7 @@ textarea {
     display: flex;
     gap: 10px;
     align-items: center;
+    /* width: 100%; */
 }
 
 #import-file {
@@ -693,4 +695,114 @@ tr.highlight {
     padding: 5px;
     border-radius: 3px;
     border: 1px solid #ddd;
+}
+
+/*20250424*/
+.highlight {
+    animation: highlight 2s;
+    background-color: #ffeb3b;
+}
+
+@keyframes highlight {
+    0% { background-color: #ffeb3b; }
+    100% { background-color: transparent; }
+}
+
+
+/*20240424*/
+/* 添加搜索框样式 */
+.search-container {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.search-container input {
+    flex-grow: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.search-container button {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.search-container button:hover {
+    background-color: #45a049;
+}
+
+#clear-search-btn {
+    background-color: #f44336;
+}
+
+#clear-search-btn:hover {
+    background-color: #d32f2f;
+}
+
+/* 隐藏ID列或使用自然序号 */
+#vocab-table th:nth-child(1),
+#vocab-table td:nth-child(1) {
+    /* display: none; /* 隐藏ID列 */ */
+    /* 或者使用以下样式显示自然序号 */
+    width: 50px; text-align: center;
+}
+
+/***************************************/
+/* 隐藏原始ID列（如果存在） */
+/* #vocab-table th:nth-child(1),
+#vocab-table td:nth-child(1) {
+    display: none;
+} */
+
+/* 或者如果你已经移除了ID列，只需确保序号列样式美观 */
+#vocab-table th:first-child,
+#vocab-table td:first-child {
+    width: 60px;
+    text-align: center;
+    font-weight: bold; /* normal; */
+    color: #666;
+}
+
+
+/**/
+/* 序号列样式 */
+/* #vocab-table td:first-child {
+    width: 50px;
+    text-align: center;
+    background-color: #f8f9fa;
+    font-weight: bold;
+    color: #495057;
+    border-right: 1px solid #dee2e6;
+} */
+
+/* 分页按钮激活状态 */
+/* #page-numbers button.active {
+    background-color: #007bff;
+    color: white;
+} */
+
+
+/***************************************************************/
+/* 高亮样式 */
+.highlight {
+    animation: highlight 2s ease-in-out;
+    background-color: #fffde7 !important; /* 淡黄色背景 */
+}
+
+@keyframes highlight {
+    0% { background-color: #fff176; }  /* 亮黄色 */
+    70% { background-color: #fff176; } /* 保持颜色 */
+    100% { background-color: #fffde7; } /* 淡出到淡黄色 */
+}
+
+/* 确保表格行有过渡效果 */
+#vocab-table tr {
+    transition: background-color 0.3s ease;
 }

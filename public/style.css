@@ -806,3 +806,24 @@ tr.highlight {
 #vocab-table tr {
     transition: background-color 0.3s ease;
 }
+
+/***********************************************************/
+/* 排序选项样式 */
+.sort-options {
+    margin: 15px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sort-options select {
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+}
+
+.sort-options span {
+    font-size: 14px;
+    color: #666;
+}

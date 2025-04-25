@@ -1,3 +1,7 @@
+// 在全局变量部分添加排序相关变量
+let currentSortField = 'word'; // 默认按单词排序
+let currentSortOrder = 'asc';  // 默认升序
+
 let sortedVocabData = []; // 新增全局变量存储排序后的完整数据
 
 // 在script.js顶部添加全局变量
@@ -258,8 +262,10 @@ async function loadVocab(page = currentPage, size = pageSize, searchTerm = curre
         const result = await response.json();
         let vocabData = result.encoded ? safeBase64Decode(result.data) : result.data;
         
-        // 按字母顺序排序并存储到全局变量
-        sortedVocabData = [...vocabData].sort((a, b) => a.word.localeCompare(b.word));
+        //// 按字母顺序排序并存储到全局变量
+        //sortedVocabData = [...vocabData].sort((a, b) => a.word.localeCompare(b.word));
+        // 排序处理
+        sortedVocabData = sortVocabData(vocabData, currentSortField, currentSortOrder);
         
         // 搜索过滤
         if (searchTerm) {
@@ -301,6 +307,39 @@ async function loadVocab(page = currentPage, size = pageSize, searchTerm = curre
     }
 }
 
+// 添加排序函数
+function sortVocabData(data, field, order) {
+    const sorted = [...data];
+    
+    sorted.sort((a, b) => {
+        let valueA, valueB;
+        
+        switch(field) {
+            case 'word':
+                valueA = a.word.toLowerCase();
+                valueB = b.word.toLowerCase();
+                break;
+            case 'id':
+                valueA = a.id;
+                valueB = b.id;
+                break;
+            case 'createdAt':
+                valueA = new Date(a.createdAt).getTime();
+                valueB = new Date(b.createdAt).getTime();
+                break;
+            default:
+                valueA = a.word.toLowerCase();
+                valueB = b.word.toLowerCase();
+        }
+        
+        if (valueA < valueB) return order === 'asc' ? -1 : 1;
+        if (valueA > valueB) return order === 'asc' ? 1 : -1;
+        return 0;
+    });
+    
+    return sorted;
+}
+
 
 
 // 添加更新词汇总数的函数
@@ -312,7 +351,7 @@ function updateVocabCount(count) {
 }
 
 // 单独渲染表格的函数
-function renderVocabTable(data, highlightId = null) {
+/* function renderVocabTable(data, highlightId = null) {
     const tbody = document.querySelector('#vocab-table tbody');
     tbody.innerHTML = '';
     
@@ -338,6 +377,47 @@ function renderVocabTable(data, highlightId = null) {
         `;
         
         // 高亮显示
+        if (highlightId && item.id === highlightId) {
+            row.classList.add('highlight');
+            setTimeout(() => row.classList.remove('highlight'), 2000);
+        }
+        
+        tbody.appendChild(row);
+    });
+} */
+
+function renderVocabTable(data, highlightId = null) {
+    const tbody = document.querySelector('#vocab-table tbody');
+    tbody.innerHTML = '';
+    
+    data.forEach((item, index) => {
+        // 根据当前排序方式计算正确的序号
+        let rowNumber;
+        if (currentSortField === 'id' && currentSortOrder === 'asc') {
+            // 按ID升序时直接使用ID作为序号
+            rowNumber = item.id;
+        } else {
+            // 其他情况使用分页序号
+            const globalIndex = sortedVocabData.findIndex(v => v.id === item.id);
+            rowNumber = globalIndex >= 0 ? globalIndex + 1 : (currentPage - 1) * pageSize + index + 1;
+        }
+        
+        const row = document.createElement('tr');
+        row.dataset.id = item.id;
+        row.innerHTML = `
+            <td>${rowNumber}</td>
+            <td>${item.word}</td>
+            <td>${item.definition}</td>
+            <td>${item.createdBy}</td>
+            <td>${new Date(item.createdAt).toLocaleString()}</td>
+            <td>
+                <button class="edit-btn admin-only" data-id="${item.id}">编辑</button>
+                <button class="delete-btn admin-only" data-id="${item.id}">删除</button>
+                <button class="save-btn admin-only" data-id="${item.id}" style="display:none;">保存</button>
+                <button class="cancel-btn admin-only" data-id="${item.id}" style="display:none;">取消</button>
+            </td>
+        `;
+        
         if (highlightId && item.id === highlightId) {
             row.classList.add('highlight');
             setTimeout(() => row.classList.remove('highlight'), 2000);
@@ -534,7 +614,19 @@ document.addEventListener('DOMContentLoaded', async () => {
             // 成功处理
             form.reset();
             document.getElementById('add-vocab-modal').classList.add('hidden');
-            await loadVocab(currentPage, pageSize, currentSearchTerm); // 保持当前页和搜索条件
+            //await loadVocab(currentPage, pageSize, currentSearchTerm); // 保持当前页和搜索条件
+
+            // 重新加载词汇并高亮显示新添加的项目
+            await loadVocab(currentPage, pageSize, currentSearchTerm, result.item.id);
+            
+            // 滚动到新添加的行
+            const row = document.querySelector(`tr[data-id="${result.item.id}"]`);
+            if (row) {
+                setTimeout(() => {
+                    row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 100); // 小延迟确保DOM更新完成
+            }
+
             showToast(`"${result.item.word}" 添加成功`, 'success');
         } catch (error) {
             console.error('添加失败:', error);
@@ -786,6 +878,20 @@ document.addEventListener('DOMContentLoaded', async () => {
             loadVocab(1, pageSize, currentSearchTerm);
         }
     });
+
+    // 排序字段变化事件
+    document.getElementById('sort-by').addEventListener('change', (e) => {
+        currentSortField = e.target.value;
+        loadVocab(1, pageSize, currentSearchTerm); // 排序后回到第一页
+    });
+    
+    // 排序顺序变化事件
+    document.getElementById('sort-order').addEventListener('change', (e) => {
+        currentSortOrder = e.target.value;
+        loadVocab(1, pageSize, currentSearchTerm); // 排序后回到第一页
+    });
+
+
     
     // 初始加载
     await loadVocab(1, pageSize);

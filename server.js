@@ -655,6 +655,10 @@ app.get('/api/stats', (req, res) => {
 }); */
 
 
+app.get('/tencent2693888209070690156.txt', (req, res) => {
+  res.sendFile(path.join(__dirname, 'tencent2693888209070690156.txt'));
+});
+
 // 处理前端路由
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));

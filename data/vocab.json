@@ -3,149 +3,3234 @@
     "id": 1,
     "word": "plug in type",
     "definition": "插接件结构(插入式结构)",
-    "createdBy": "admin",
-    "createdAt": "2025-04-16T14:32:44.340Z",
-    "updatedAt": "2025-04-24T12:34:12.273Z"
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
   },
   {
     "id": 2,
     "word": "shim/wedge",
     "definition": "垫铁",
-    "createdBy": "admin",
-    "createdAt": "2025-04-16T14:32:44.340Z"
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
   },
   {
     "id": 3,
     "word": "harmonics wave voltage",
     "definition": "谐波电压",
-    "createdBy": "admin",
-    "createdAt": "2025-04-16T14:32:44.340Z"
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
   },
   {
     "id": 4,
     "word": "swab down",
     "definition": "正包",
-    "createdBy": "admin",
-    "createdAt": "2025-04-16T14:32:44.340Z"
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
   },
   {
     "id": 5,
     "word": "tachometer device",
     "definition": "测速装置",
-    "createdBy": "admin",
-    "createdAt": "2025-04-16T14:32:44.340Z"
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
   },
   {
     "id": 6,
     "word": "air-discharging roller",
     "definition": "排气装置",
-    "createdBy": "admin",
-    "createdAt": "2025-04-16T14:32:44.340Z",
-    "updatedAt": "2025-04-24T05:52:17.322Z"
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
   },
   {
     "id": 7,
     "word": "no-return device",
-    "definition": "阻退装置",
-    "createdBy": "admin",
-    "createdAt": "2025-04-16T14:32:44.340Z"
+    "definition": "止退装置",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
   },
   {
     "id": 8,
     "word": "pivoting device",
     "definition": "回转机构",
-    "createdBy": "admin",
-    "createdAt": "2025-04-16T14:32:44.340Z"
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
   },
   {
     "id": 9,
     "word": "bracket",
     "definition": "托架",
-    "createdBy": "admin",
-    "createdAt": "2025-04-16T14:32:44.341Z"
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
   },
   {
     "id": 10,
     "word": "wind and applicator assembly",
     "definition": "缠贴装置",
-    "createdBy": "admin",
-    "createdAt": "2025-04-16T14:32:44.341Z"
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
   },
   {
     "id": 11,
     "word": "edge guiding",
     "definition": "防偏随动导辊组",
-    "createdBy": "admin",
-    "createdAt": "2025-04-16T14:32:44.341Z"
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
   },
   {
     "id": 12,
     "word": "sliding block",
     "definition": "滑块",
-    "createdBy": "admin",
-    "createdAt": "2025-04-16T14:32:44.341Z"
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
   },
   {
     "id": 13,
     "word": "hinge support",
     "definition": "铰接架",
-    "createdBy": "admin",
-    "createdAt": "2025-04-16T14:32:44.341Z"
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
   },
   {
     "id": 14,
     "word": "check bar",
     "definition": "止退杆",
-    "createdBy": "admin",
-    "createdAt": "2025-04-16T14:32:44.341Z"
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
   },
   {
     "id": 15,
     "word": "unilateral no-return valve",
     "definition": "单向止退阀",
-    "createdBy": "admin",
-    "createdAt": "2025-04-16T14:32:44.341Z"
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
   },
   {
     "id": 16,
     "word": "pushing cylinder",
     "definition": "推胎气缸",
-    "createdBy": "admin",
-    "createdAt": "2025-04-16T14:32:44.341Z"
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
   },
   {
     "id": 17,
     "word": "brake motor",
     "definition": "制动电机",
-    "createdBy": "admin",
-    "createdAt": "2025-04-16T14:32:44.341Z"
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
   },
   {
     "id": 18,
     "word": "spreading cylinder",
     "definition": "扩胎气缸",
-    "createdBy": "admin",
-    "createdAt": "2025-04-16T14:32:44.341Z"
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
   },
   {
     "id": 19,
     "word": "main circuit breaker",
     "definition": "主断路器",
-    "createdBy": "admin",
-    "createdAt": "2025-04-16T14:32:44.341Z"
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
   },
   {
     "id": 20,
     "word": "with encoder feedback for main motor",
     "definition": "主电机转速码盘反馈",
-    "createdBy": "admin",
-    "createdAt": "2025-04-16T14:32:44.341Z"
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
   },
   {
     "id": 21,
     "word": "temperature regulation",
     "definition": "温度调节",
-    "createdBy": "admin",
-    "createdAt": "2025-04-16T14:32:44.341Z"
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 22,
+    "word": "cast steel",
+    "definition": "铸钢",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 23,
+    "word": "pin barrel",
+    "definition": "销钉机",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 24,
+    "word": "feeding barrel",
+    "definition": "喂料机筒",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 25,
+    "word": "spiral undercut for introducing the rubber",
+    "definition": "引胶螺旋切槽",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 26,
+    "word": "flexible coupler",
+    "definition": "弹性联轴节",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 27,
+    "word": "front/back coupling disc",
+    "definition": "前/后联接盘",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 28,
+    "word": "left/right clamping rings",
+    "definition": "左/右卡环",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 29,
+    "word": "composed links",
+    "definition": "组合连杆",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 30,
+    "word": "jacketed cooling drum",
+    "definition": "夹套式冷却鼓",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 31,
+    "word": "fixed roller",
+    "definition": "固定辊",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 32,
+    "word": "float roller",
+    "definition": "浮动辊",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 33,
+    "word": "mechanical positioning",
+    "definition": "机械定位",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 34,
+    "word": "roller head/applicator",
+    "definition": "缠绕头",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 35,
+    "word": "supported roller",
+    "definition": "托辊",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 36,
+    "word": "width measuring device",
+    "definition": "测宽装置",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 37,
+    "word": "forming roller",
+    "definition": "压型辊",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 38,
+    "word": "festoon loop",
+    "definition": "储料装置",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 39,
+    "word": "movable base plate",
+    "definition": "运动底座",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 40,
+    "word": "tooth bearing",
+    "definition": "转盘轴承",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 41,
+    "word": "no-return device",
+    "definition": "止退装置",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 42,
+    "word": "holding plate",
+    "definition": "托板",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 43,
+    "word": "commercial parts list",
+    "definition": "外购件型号及供应商",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 44,
+    "word": "foundation bolt",
+    "definition": "地脚螺栓",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 45,
+    "word": "washer",
+    "definition": "垫圈",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 46,
+    "word": "connector",
+    "definition": "连接头",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 47,
+    "word": "joint",
+    "definition": "接头",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 48,
+    "word": "splicer",
+    "definition": "拼接接头",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 49,
+    "word": "ball spline",
+    "definition": "滚珠花键",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 50,
+    "word": "front guide unit",
+    "definition": "前导向机构",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 51,
+    "word": "single side dustproof cover",
+    "definition": "单侧防尘盖",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 52,
+    "word": "deep grooved spherical bearing/shaft",
+    "definition": "深沟球轴承",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 53,
+    "word": "double row universial roller",
+    "definition": "双排万向轮",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 54,
+    "word": "toothed belt",
+    "definition": "齿形带",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 55,
+    "word": "driven wheel",
+    "definition": "被动轮",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 56,
+    "word": "edge guide of pulley",
+    "definition": "带轮挡边",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 57,
+    "word": "pulley core",
+    "definition": "带轮芯",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 58,
+    "word": "non-driven wheel",
+    "definition": "主动轮",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 59,
+    "word": "nylon reinforced belt",
+    "definition": "尼龙复合强力带",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 60,
+    "word": "star-shaped handle",
+    "definition": "星形把手",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 61,
+    "word": "guide roller",
+    "definition": "算盘轮",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 62,
+    "word": "hand wheel",
+    "definition": "手轮",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 63,
+    "word": "rack",
+    "definition": "齿条",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 64,
+    "word": "gear",
+    "definition": "齿轮",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 65,
+    "word": "cat truck",
+    "definition": "坦克链",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 66,
+    "word": "LM rail",
+    "definition": "直线导轨",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 67,
+    "word": "cushion accessories",
+    "definition": "缓冲附件",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 68,
+    "word": "plastic air pipe",
+    "definition": "塑料气管",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 69,
+    "word": "check throttle valve",
+    "definition": "单向节流阀",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 70,
+    "word": "fast exhaust valve",
+    "definition": "快排阀",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 71,
+    "word": "stainless steel pipe joint",
+    "definition": "不锈钢管接头",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 72,
+    "word": "L-shape insert/threaded joint",
+    "definition": "L型插入式/螺纹接头",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 73,
+    "word": "chuck",
+    "definition": "卡套",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 74,
+    "word": "non-lub. bearing",
+    "definition": "无油润滑轴承",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 75,
+    "word": "non-lub. bearing",
+    "definition": "无油润滑轴承",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 76,
+    "word": "lubrication",
+    "definition": "润滑",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 77,
+    "word": "X-shape seal ring",
+    "definition": "X型密封圈",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 78,
+    "word": "non-standard",
+    "definition": "非标",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 79,
+    "word": "o-shape seal ring",
+    "definition": "o型密封圈",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 80,
+    "word": "oil seal",
+    "definition": "油封",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 81,
+    "word": "roller bearing",
+    "definition": "滚动轴承",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 82,
+    "word": "capacitance",
+    "definition": "电容",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 83,
+    "word": "dial gauge",
+    "definition": "指示表/百分表",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 84,
+    "word": "liner roller",
+    "definition": "垫布辊",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 85,
+    "word": "guide roller",
+    "definition": "导向辊",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 86,
+    "word": "brush roller",
+    "definition": "毛刷辊",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 87,
+    "word": "safety chuck",
+    "definition": "安全卡盘",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 88,
+    "word": "vertical plane",
+    "definition": "垂直面",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 89,
+    "word": "draw-off roller",
+    "definition": "牵引辊",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 90,
+    "word": "potentiometer",
+    "definition": "电位计",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 91,
+    "word": "yellow lightening symbol",
+    "definition": "黄色闪电符号",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 92,
+    "word": "terminal short circuit",
+    "definition": "端子短路片",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 93,
+    "word": "wrapping machine",
+    "definition": "包布机",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 94,
+    "word": "cast aluminum",
+    "definition": "铸铝/生铝",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 95,
+    "word": "edge guiding unit",
+    "definition": "定边纠偏机",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 96,
+    "word": "door lamp assembly",
+    "definition": "门灯组件",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 97,
+    "word": "infrared sensor",
+    "definition": "红外线传感",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 98,
+    "word": "pusher",
+    "definition": "推动器",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 99,
+    "word": "transformer",
+    "definition": "变压器",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 100,
+    "word": "inverter",
+    "definition": "变频器",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 101,
+    "word": "reflector",
+    "definition": "反射镜/反射体",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 102,
+    "word": "turret",
+    "definition": "回转台",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 103,
+    "word": "snag",
+    "definition": "障碍",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 104,
+    "word": "telescopic",
+    "definition": "伸缩的",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 105,
+    "word": "spacer",
+    "definition": "间隔装置",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 106,
+    "word": "strip applier",
+    "definition": "胶条缠绕装置",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 107,
+    "word": "silencer",
+    "definition": "消音器",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 108,
+    "word": "C-frame",
+    "definition": "龙门框架",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 109,
+    "word": "squeegee",
+    "definition": "粘合层",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 110,
+    "word": "cantilever",
+    "definition": "悬臂",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 111,
+    "word": "hinge",
+    "definition": "铰链",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 112,
+    "word": "socket/receptacle",
+    "definition": "插座",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 113,
+    "word": "torque clutch",
+    "definition": "扭矩离合",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 114,
+    "word": "reducer",
+    "definition": "减速器",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 115,
+    "word": "reed",
+    "definition": "簧片/舌",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 116,
+    "word": "teflon",
+    "definition": "特氟纶",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 117,
+    "word": "intermediate shaft",
+    "definition": "中间轴",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 118,
+    "word": "rotary joint",
+    "definition": "回转节/回转接头",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 119,
+    "word": "sprocket",
+    "definition": "链齿轮",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 120,
+    "word": "flange",
+    "definition": "法兰",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 121,
+    "word": "single-phase",
+    "definition": "单相的",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 122,
+    "word": "profile steel",
+    "definition": "型钢",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 123,
+    "word": "serial interface",
+    "definition": "串行接口",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 124,
+    "word": "splicing zipper",
+    "definition": "接头缝合",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 125,
+    "word": "long-key shaft",
+    "definition": "长键轴",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 126,
+    "word": "centerline guide lamp",
+    "definition": "中心线固定灯标",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 127,
+    "word": "let-off festoon",
+    "definition": "导开装置缓冲",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 128,
+    "word": "cut to length",
+    "definition": "定长裁断",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 129,
+    "word": "safety hood",
+    "definition": "安全套",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 130,
+    "word": "pre-setter",
+    "definition": "预置器",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 131,
+    "word": "front application tray",
+    "definition": "前摆动架",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 132,
+    "word": "coupler",
+    "definition": "联轴节",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 133,
+    "word": "padlock",
+    "definition": "挂锁",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 134,
+    "word": "bobbin",
+    "definition": "工字轮",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 135,
+    "word": "trunnion",
+    "definition": "耳轴",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 136,
+    "word": "differential",
+    "definition": "差速器",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 137,
+    "word": "worm reducer",
+    "definition": "涡轮减速机",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 138,
+    "word": "bronze bushing of vertical shaft",
+    "definition": "立轴铜套",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 139,
+    "word": "bronze bushing of swivel shaft",
+    "definition": "摆轴铜套",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 140,
+    "word": "back-up",
+    "definition": "备份",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 141,
+    "word": "treading profile",
+    "definition": "胎面型胶",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 142,
+    "word": "band puller",
+    "definition": "帘布筒拉出装置",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 143,
+    "word": "band expander assembly",
+    "definition": "帘布筒扩布器部套",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 144,
+    "word": "bead set mechanism",
+    "definition": "扣环装置",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 145,
+    "word": "ply pullout mechanism",
+    "definition": "帘布拉出装置",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 146,
+    "word": "air-operated feed plate",
+    "definition": "气动翻板",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 147,
+    "word": "cushion roller conveyor",
+    "definition": "缓冲辊道",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 148,
+    "word": "water flow indicator",
+    "definition": "水流量指示器",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 149,
+    "word": "water level indicator",
+    "definition": "水位指示器",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 150,
+    "word": "coupling disc",
+    "definition": "联结盘",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 151,
+    "word": "designed in jacket",
+    "definition": "夹套结构",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 152,
+    "word": "spiral undercut",
+    "definition": "螺旋切槽",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 153,
+    "word": "thrust bearing",
+    "definition": "止推轴承",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 154,
+    "word": "call-out",
+    "definition": "调用",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 155,
+    "word": "pull-rope E-stop",
+    "definition": "拉线急停",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 156,
+    "word": "high pos. check",
+    "definition": "高位检测",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 157,
+    "word": "low pos. check",
+    "definition": "地位检测",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 158,
+    "word": "festoon pos. check",
+    "definition": "储料位检测",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 159,
+    "word": "mark check",
+    "definition": "划线检测",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 160,
+    "word": "up check",
+    "definition": "抬起检测",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 161,
+    "word": "carriage lock check",
+    "definition": "小车锁紧检测",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 162,
+    "word": "belt open/close stitcher",
+    "definition": "带束层分合压辊",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 163,
+    "word": "industrial computer",
+    "definition": "工控机",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 164,
+    "word": "pos. limit",
+    "definition": "正极限",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 165,
+    "word": "neg. limit",
+    "definition": "负极限",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 166,
+    "word": "mushroom type push button",
+    "definition": "推拉蘑菇头按钮",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 167,
+    "word": "3-way self-lock knob",
+    "definition": "三位自锁旋钮",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 168,
+    "word": "laser in traverse",
+    "definition": "横线灯",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 169,
+    "word": "min. rotating pos.",
+    "definition": "旋转最小位",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 170,
+    "word": "left laser of building drum",
+    "definition": "成型鼓左边灯标",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 171,
+    "word": "back stitcher-rotary angle encoder",
+    "definition": "后压辊转角编码器",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 172,
+    "word": "increment encoder",
+    "definition": "增量编码器",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 173,
+    "word": "carriage, cassette, cartridge",
+    "definition": "小车",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 174,
+    "word": "edge feeler",
+    "definition": "边探测器，塞尺",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 175,
+    "word": "Loop",
+    "definition": "储料兜",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 176,
+    "word": "counter",
+    "definition": "计数器",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 177,
+    "word": "reset shift counter",
+    "definition": "计数器复零",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 178,
+    "word": "reclose",
+    "definition": "重新接通(闭合)",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 179,
+    "word": "trimming of one wire",
+    "definition": "一根钢丝修边",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 180,
+    "word": "dead center",
+    "definition": "死点",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 181,
+    "word": "put out of service",
+    "definition": "断电",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 182,
+    "word": "fly wheel",
+    "definition": "飞轮",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 183,
+    "word": "run in guide",
+    "definition": "入口导向辊",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 184,
+    "word": "aluminum",
+    "definition": "铝",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 185,
+    "word": "oiler",
+    "definition": "注油壶",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 186,
+    "word": "default",
+    "definition": "默认值，缺省",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 187,
+    "word": "utility",
+    "definition": "效用性能",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 188,
+    "word": "hopper",
+    "definition": "漏斗",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 189,
+    "word": "infrastructure",
+    "definition": "下部构造",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 190,
+    "word": "data transmission",
+    "definition": "数据传输",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 191,
+    "word": "commissioning",
+    "definition": "试车",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 192,
+    "word": "impregnate",
+    "definition": "注入，灌注",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 193,
+    "word": "detectable",
+    "definition": "可检测的",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 194,
+    "word": "hierarchy",
+    "definition": "层次，层级/区分",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 195,
+    "word": "professional ethics",
+    "definition": "职业道德",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 196,
+    "word": "stiffener",
+    "definition": "硬化剂",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 197,
+    "word": "booster",
+    "definition": "助推器",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 198,
+    "word": "productivity",
+    "definition": "生产能力",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 199,
+    "word": "dial indicator",
+    "definition": "千分表",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 200,
+    "word": "wedge",
+    "definition": "垫胶",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 201,
+    "word": "plug screw",
+    "definition": "螺塞",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 202,
+    "word": "misplace",
+    "definition": "放错位置",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 203,
+    "word": "pigment",
+    "definition": "颜料",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 204,
+    "word": "protrusion",
+    "definition": "突出，伸出，突出体",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 205,
+    "word": "condensation",
+    "definition": "浓缩，冷凝，凝块",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 206,
+    "word": "electrode",
+    "definition": "焊条",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 207,
+    "word": "welding wire type",
+    "definition": "焊丝规格",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 208,
+    "word": "blunt edge",
+    "definition": "钝边",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 209,
+    "word": "cross reference",
+    "definition": "对照参考",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 210,
+    "word": "carcass/carcase",
+    "definition": "胎体",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 211,
+    "word": "tie gum",
+    "definition": "隔离胶",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 212,
+    "word": "screw driver",
+    "definition": "螺丝刀",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 213,
+    "word": "plyer",
+    "definition": "钳子",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 214,
+    "word": "keep confidential",
+    "definition": "保密",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 215,
+    "word": "shown as figure 2",
+    "definition": "如图2所示",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 216,
+    "word": "procedure qualification",
+    "definition": "工艺评定",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 217,
+    "word": "analysis & testing report",
+    "definition": "分析测试报告",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 218,
+    "word": "dipping tank",
+    "definition": "主水箱",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 219,
+    "word": "anti-sticking tank",
+    "definition": "辅水箱",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 220,
+    "word": "polish",
+    "definition": "抛光",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 221,
+    "word": "macro-structure",
+    "definition": "宏观结构",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 222,
+    "word": "macro-defect",
+    "definition": "宏观缺陷",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 223,
+    "word": "non-fusion",
+    "definition": "未熔",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 224,
+    "word": "vickers hardness",
+    "definition": "维氏硬度",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 225,
+    "word": "penumatic panel",
+    "definition": "气动箱",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 226,
+    "word": "receiving tank",
+    "definition": "接水箱",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 227,
+    "word": "stacking device",
+    "definition": "摆片装置",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 228,
+    "word": "dry test",
+    "definition": "空负荷试车",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 229,
+    "word": "wet test",
+    "definition": "负荷试车",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 230,
+    "word": "commercial parts",
+    "definition": "外购件",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 231,
+    "word": "associating parts",
+    "definition": "配套件",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 232,
+    "word": "earth pole",
+    "definition": "安全地极",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 233,
+    "word": "edge guiding to center",
+    "definition": "纠偏回中",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 234,
+    "word": "vacuum suction cups",
+    "definition": "真空吸盘",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 235,
+    "word": "ultrasonic knife",
+    "definition": "超声波刀",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 236,
+    "word": "insulation tank",
+    "definition": "隔离剂罐",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 237,
+    "word": "accelerator",
+    "definition": "加速器",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 238,
+    "word": "apparatus",
+    "definition": "仪器",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 239,
+    "word": "welding throat",
+    "definition": "焊喉",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 240,
+    "word": "erode",
+    "definition": "侵蚀",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 241,
+    "word": "viscosity",
+    "definition": "粘度",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 242,
+    "word": "heat treatment procedure",
+    "definition": "热处理工艺",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 243,
+    "word": "dolly",
+    "definition": "车间搬运车",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 244,
+    "word": "shield",
+    "definition": "屏蔽",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 245,
+    "word": "spanner",
+    "definition": "扳手",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 246,
+    "word": "screw spanner",
+    "definition": "螺丝起子",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 247,
+    "word": "auxiliary machine",
+    "definition": "辅机",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 248,
+    "word": "solid state equipment",
+    "definition": "固态元件",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 249,
+    "word": "lock-out & tag-out procedure",
+    "definition": "上锁&解锁程序",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 250,
+    "word": "cement",
+    "definition": "水泥",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 251,
+    "word": "symmetric",
+    "definition": "均衡的",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 252,
+    "word": "dissymmetrical",
+    "definition": "不均匀的",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 253,
+    "word": "suction cup",
+    "definition": "吸盘",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 254,
+    "word": "double piston bar",
+    "definition": "双活塞杆",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 255,
+    "word": "locking assembly unit",
+    "definition": "胀套",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 256,
+    "word": "stopping bolt",
+    "definition": "止动螺栓",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 257,
+    "word": "spacer of CD drum",
+    "definition": "贴合鼓鼓板",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 258,
+    "word": "throttle valve",
+    "definition": "节流阀",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 259,
+    "word": "regulating valve",
+    "definition": "调节阀",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 260,
+    "word": "impulse value",
+    "definition": "脉冲数",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 261,
+    "word": "pushover bladder",
+    "definition": "助推胶囊",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 262,
+    "word": "vent",
+    "definition": "排气口",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 263,
+    "word": "grouting",
+    "definition": "灌浆",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 264,
+    "word": "flammable",
+    "definition": "易燃的",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 265,
+    "word": "humidity",
+    "definition": "湿度",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 266,
+    "word": "moisture",
+    "definition": "潮湿",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 267,
+    "word": "altitude",
+    "definition": "高度",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 268,
+    "word": "decelerate",
+    "definition": "使减速",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 269,
+    "word": "safety pull rope switch",
+    "definition": "安全拉绳开关",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 270,
+    "word": "whisker",
+    "definition": "须接线",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 271,
+    "word": "streamlined",
+    "definition": "改进的",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 272,
+    "word": "interface module",
+    "definition": "接口摸件",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 273,
+    "word": "mesh",
+    "definition": "网眼",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 274,
+    "word": "uncertainty",
+    "definition": "误差，不确定",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 275,
+    "word": "script",
+    "definition": "手稿",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 276,
+    "word": "coefficient",
+    "definition": "系数",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 277,
+    "word": "walkthrough",
+    "definition": "预排",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 278,
+    "word": "cross section",
+    "definition": "横截面",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 279,
+    "word": "perception",
+    "definition": "感知器",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 280,
+    "word": "profiled steel",
+    "definition": "型材",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 281,
+    "word": "knob",
+    "definition": "旋钮",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 282,
+    "word": "hard aluminum plate",
+    "definition": "硬铝板",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 283,
+    "word": "catercorner",
+    "definition": "对角线",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 284,
+    "word": "latch",
+    "definition": "门插销",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 285,
+    "word": "receptacle plug",
+    "definition": "插座",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 286,
+    "word": "coaxial",
+    "definition": "同轴的",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 287,
+    "word": "coaxiality",
+    "definition": "同轴性",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 288,
+    "word": "C frame",
+    "definition": "龙门框架",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 289,
+    "word": "decompressor",
+    "definition": "减压装置",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 290,
+    "word": "feeding blow off",
+    "definition": "供料吹风",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 291,
+    "word": "impair",
+    "definition": "削弱",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 292,
+    "word": "nip roller",
+    "definition": "包边夹辊",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 293,
+    "word": "seamless",
+    "definition": "无缝的",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 294,
+    "word": "cast aluminium",
+    "definition": "铸铝",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 295,
+    "word": "draw off roller",
+    "definition": "牵引辊",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 296,
+    "word": "bush roller",
+    "definition": "毛刷辊",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 297,
+    "word": "treasury stock",
+    "definition": "股份",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 298,
+    "word": "deferred assets",
+    "definition": "递延资产",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 299,
+    "word": "intangible assets",
+    "definition": "无形资产",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 300,
+    "word": "susceptible",
+    "definition": "易受影响的",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 301,
+    "word": "shipping container",
+    "definition": "集装箱",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 302,
+    "word": "muffler",
+    "definition": "消音器",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 303,
+    "word": "splinter",
+    "definition": "碎片",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 304,
+    "word": "plasma",
+    "definition": "等离子",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 305,
+    "word": "pallet",
+    "definition": "货盘，扁平工具",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 306,
+    "word": "pose",
+    "definition": "引起，造成",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 307,
+    "word": "rubber compound",
+    "definition": "橡胶封口胶",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 308,
+    "word": "sulfur",
+    "definition": "硫磺",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.145Z"
+  },
+  {
+    "id": 309,
+    "word": "locknut",
+    "definition": "放松螺母",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 310,
+    "word": "china council for the promotion of international trade",
+    "definition": "中国国际贸易促进会",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 311,
+    "word": "stock guide",
+    "definition": "料卷导向",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 312,
+    "word": "fuselage",
+    "definition": "机身",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 313,
+    "word": "perpendicular",
+    "definition": "垂直度",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 314,
+    "word": "ventilation",
+    "definition": "通风",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 315,
+    "word": "ventilate",
+    "definition": "通风",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 316,
+    "word": "cable chain",
+    "definition": "牵引链",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 317,
+    "word": "elbow",
+    "definition": "弯头",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 318,
+    "word": "connector (straight)",
+    "definition": "直头",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 319,
+    "word": "jumper",
+    "definition": "跨接线",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 320,
+    "word": "leakage-proof protector",
+    "definition": "带漏电保护器",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 321,
+    "word": "working noll bus",
+    "definition": "带工作零排",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 322,
+    "word": "protective noll bus",
+    "definition": "带保护零排",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 323,
+    "word": "CF memory card",
+    "definition": "CF存储卡",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 324,
+    "word": "micro memory card",
+    "definition": "微存储卡",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 325,
+    "word": "angle-shape connector",
+    "definition": "角型连接件",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 326,
+    "word": "brake",
+    "definition": "抱闸",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 327,
+    "word": "smooth shaft",
+    "definition": "光轴",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 328,
+    "word": "cable clamper rail",
+    "definition": "电缆夹钳轨",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 329,
+    "word": "mounting plate",
+    "definition": "安装板",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 330,
+    "word": "marker",
+    "definition": "标记盘",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 331,
+    "word": "x-ray tube",
+    "definition": "球头",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 332,
+    "word": "series port cable",
+    "definition": "串口电缆",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 333,
+    "word": "fuse",
+    "definition": "熔断器",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 334,
+    "word": "air switch",
+    "definition": "空开",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 335,
+    "word": "transparent cover of light",
+    "definition": "透明灯罩",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 336,
+    "word": "door of lead room",
+    "definition": "铅门",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 337,
+    "word": "overlap",
+    "definition": "搭接",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 338,
+    "word": "forgeable piece",
+    "definition": "锻件",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 339,
+    "word": "cotter pin",
+    "definition": "开口销",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 340,
+    "word": "PID",
+    "definition": "仪表调节",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 341,
+    "word": "galvanizing",
+    "definition": "镀锌",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 342,
+    "word": "flow & pressure switch",
+    "definition": "流量和压力开关",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 343,
+    "word": "spiral undercut for introducing rubber",
+    "definition": "引胶螺旋切槽",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 344,
+    "word": "alloy",
+    "definition": "合金",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 345,
+    "word": "applicator",
+    "definition": "缠绕机头",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 346,
+    "word": "dustproof cover",
+    "definition": "防尘盖",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 347,
+    "word": "double-row universal roller",
+    "definition": "双排万向轮",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 348,
+    "word": "non-driven elastic upright roller",
+    "definition": "非动力弹性直轴",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 349,
+    "word": "plug",
+    "definition": "堵头",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 350,
+    "word": "straight through terminal",
+    "definition": "直角终端",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 351,
+    "word": "VAT(value added tax)",
+    "definition": "增值税",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 352,
+    "word": "floppy disk",
+    "definition": "软盘",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 353,
+    "word": "floppy drive",
+    "definition": "软驱",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 354,
+    "word": "water gauge",
+    "definition": "水位仪",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 355,
+    "word": "countermeasure",
+    "definition": "对策",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 356,
+    "word": "detach",
+    "definition": "分离",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 357,
+    "word": "tramp",
+    "definition": "步行",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 358,
+    "word": "contamination",
+    "definition": "污染",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 359,
+    "word": "flake off",
+    "definition": "剥离",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 360,
+    "word": "polyethylene",
+    "definition": "聚乙烯",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 361,
+    "word": "trimming machine",
+    "definition": "修边机",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 362,
+    "word": "fish paper",
+    "definition": "青壳纸",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 363,
+    "word": "cold-draw pipe",
+    "definition": "冷拔管",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 364,
+    "word": "cloth-inserted bakelite",
+    "definition": "夹布胶木",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 365,
+    "word": "advance payment guarantee",
+    "definition": "预付款保函",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 366,
+    "word": "expiry date",
+    "definition": "终止日期，有效期限",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 367,
+    "word": "Belt Edge Forcement",
+    "definition": "BEF",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 368,
+    "word": "Belt Edge Reinforcement",
+    "definition": "BER",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 369,
+    "word": "Belt Edge Wedge",
+    "definition": "BEW",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 370,
+    "word": "Safety Mat",
+    "definition": "安全地毯【Mat】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 371,
+    "word": "Safety Light Curtain",
+    "definition": "安全光幕【LC】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 372,
+    "word": "Safety Bumper",
+    "definition": "安全缓冲器【SfB】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 373,
+    "word": "Safety Relay",
+    "definition": "安全继电器【SRe】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 374,
+    "word": "Safety Pedal Switch",
+    "definition": "安全脚踏【SfPdS】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 375,
+    "word": "Safety Proximity Switch",
+    "definition": "安全接近开关",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 376,
+    "word": "Safety Door",
+    "definition": "安全门【SfD】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 377,
+    "word": "Safety Interlock Switch",
+    "definition": "安全门锁开关【GLS】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 378,
+    "word": "Safety Scanner",
+    "definition": "安全扫描仪",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 379,
+    "word": "Buttons",
+    "definition": "按钮【B】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 380,
+    "word": "Swing Out",
+    "definition": "摆出【SwOut】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 381,
+    "word": "Swing In",
+    "definition": "摆进【SwIn】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 382,
+    "word": "Safety Edge",
+    "definition": "边沿开关/安全触边【EdS】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 383,
+    "word": "Encoder",
+    "definition": "编码器",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 384,
+    "word": "Variable Frequency Device",
+    "definition": "变频器【VFD】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 385,
+    "word": "Transformer/Converter",
+    "definition": "变压器【Tr】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 386,
+    "word": "Strip",
+    "definition": "剥离",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 387,
+    "word": "Cutting Device",
+    "definition": "裁断装置",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 388,
+    "word": "Cut",
+    "definition": "裁切",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 389,
+    "word": "Scada",
+    "definition": "采集系统",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 390,
+    "word": "Operator Platform",
+    "definition": "操作平台",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 391,
+    "word": "Ultrasonic Generator",
+    "definition": "超声波发生器",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 392,
+    "word": "Liner Spool",
+    "definition": "衬布卷",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 393,
+    "word": "Shaping Drum",
+    "definition": "成型鼓【SD】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 394,
+    "word": "Shaping Drum Station",
+    "definition": "成型鼓驱动箱",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 395,
+    "word": "Shaping Drum Support",
+    "definition": "成型鼓尾架",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 396,
+    "word": "Inflate",
+    "definition": "充气【Inf】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 397,
+    "word": "Loop Device",
+    "definition": "储料装置",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 398,
+    "word": "Trigger",
+    "definition": "触发【Trg】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 399,
+    "word": "Transfer",
+    "definition": "传递【Trf】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 400,
+    "word": "Transfer Ring",
+    "definition": "传递环【Tr】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 401,
+    "word": "Transfer Base",
+    "definition": "传递环底座",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 402,
+    "word": "Sensor",
+    "definition": "传感器",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 403,
+    "word": "Blow",
+    "definition": "吹【Blw】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 404,
+    "word": "Vertical",
+    "definition": "垂直【Vt】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 405,
+    "word": "Magnetic Cylinder Sensor",
+    "definition": "磁性开关【MS】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 406,
+    "word": "Servo Motor",
+    "definition": "伺服电机【Sv】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 407,
+    "word": "Servo Control",
+    "definition": "伺服控制",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 408,
+    "word": "Servo Drive",
+    "definition": "伺服驱动器",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 409,
+    "word": "Belt",
+    "definition": "带束层",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 410,
+    "word": "Belt Transfer Ring",
+    "definition": "带束层传递环",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 411,
+    "word": "Belt Drum",
+    "definition": "带束层鼓【BTD】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 412,
+    "word": "Single",
+    "definition": "单【Sg】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 413,
+    "word": "Blade",
+    "definition": "刀",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 414,
+    "word": "Rail",
+    "definition": "导轨",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 415,
+    "word": "Let Off",
+    "definition": "导开【LO】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 416,
+    "word": "Let-off Station",
+    "definition": "导开装置",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 417,
+    "word": "Laser Line Light",
+    "definition": "灯光标尺",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 418,
+    "word": "Electronic Cylinder",
+    "definition": "电缸【Ecyd】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 419,
+    "word": "Control Cabinet",
+    "definition": "电控柜",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 420,
+    "word": "Centering Device",
+    "definition": "调偏装置",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 421,
+    "word": "Spot",
+    "definition": "定位【Spt】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 422,
+    "word": "Guiding Device",
+    "definition": "定中装置/纠偏装置",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 423,
+    "word": "Circuit Breaker",
+    "definition": "断路器",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 424,
+    "word": "Multidisc Roller",
+    "definition": "多片压辊",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 425,
+    "word": "Turn Up",
+    "definition": "反包【TU】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 426,
+    "word": "Turn Up Pole",
+    "definition": "反包杆/反包指",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 427,
+    "word": "Turn Up Bladder",
+    "definition": "反包胶囊",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 428,
+    "word": "Reverse",
+    "definition": "反转【Rev】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 429,
+    "word": "Return",
+    "definition": "返回【Rtn】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 430,
+    "word": "Exhaust",
+    "definition": "放气【Exh】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 431,
+    "word": "Place",
+    "definition": "放置【Ple】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 432,
+    "word": "Non-Contact Interlock Safety Switch",
+    "definition": "非接触式安全门开关【NCS】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 433,
+    "word": "Separte",
+    "definition": "分合【Sep】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 434,
+    "word": "Open",
+    "definition": "分开【Opn】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 435,
+    "word": "Junction Box",
+    "definition": "分线盒",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 436,
+    "word": "Dancing Roller",
+    "definition": "浮动辊",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 437,
+    "word": "Load Break Switch",
+    "definition": "负载断路开关【LdBS】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 438,
+    "word": "Pre-Assembly",
+    "definition": "复合件【PA】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 439,
+    "word": "Steel Chafer",
+    "definition": "钢丝包布/子口",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 440,
+    "word": "Steel Base",
+    "definition": "钢制基础",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 441,
+    "word": "Tools",
+    "definition": "工装",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 442,
+    "word": "Spool",
+    "definition": "工字轮",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 443,
+    "word": "Servicer",
+    "definition": "供料架",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 444,
+    "word": "Drum",
+    "definition": "鼓",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 445,
+    "word": "Joint Less Band",
+    "definition": "冠带条【JLB】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 446,
+    "word": "Photoelectric Switch",
+    "definition": "光电开关",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 447,
+    "word": "Stitch",
+    "definition": "滚压",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 448,
+    "word": "Rear",
+    "definition": "后【Rr】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 449,
+    "word": "Rear Guiding Device",
+    "definition": "后定中装置",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 450,
+    "word": "Rim Cushion",
+    "definition": "护胶",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 451,
+    "word": "Encircle",
+    "definition": "环绕【Ecr】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 452,
+    "word": "Mechanical Drum",
+    "definition": "机械鼓",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 453,
+    "word": "Laser Light",
+    "definition": "激光灯",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 454,
+    "word": "Emergency Stop",
+    "definition": "急停",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 455,
+    "word": "Emergency Stop Switch",
+    "definition": "急停开关",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 456,
+    "word": "Relay",
+    "definition": "继电器",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 457,
+    "word": "Clamp Ring",
+    "definition": "夹持环",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 458,
+    "word": "Frame",
+    "definition": "架体【Frm】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 459,
+    "word": "Shoulder Bladder",
+    "definition": "肩部胶囊",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 460,
+    "word": "Shoulder Wedge Let Off Station",
+    "definition": "肩垫胶导开",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 461,
+    "word": "Maintenance Platform",
+    "definition": "检修平台",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
+  },
+  {
+    "id": 462,
+    "word": "Alternating Current",
+    "definition": "交流【AC】",
+    "createdBy": "super",
+    "createdAt": "2025-05-13T02:41:24.146Z"
   }
 ]

@@ -58,7 +58,7 @@ app.use(session({
 
 
 // 修改文件上传配置
-const upload = multer({ 
+/* const upload = multer({ 
     dest: 'uploads/',
     limits: {
         fileSize: 5 * 1024 * 1024 // 限制5MB
@@ -70,11 +70,59 @@ const upload = multer({
             cb(new Error('只允许上传CSV文件'), false);
         }
     }
+}); */
+
+const upload = multer({ 
+    dest: 'uploads/',
+    limits: {
+        fileSize: 5 * 1024 * 1024 // 限制5MB
+    },
+    fileFilter: (req, file, cb) => {
+        // 允许JSON和CSV文件
+        if (file.mimetype === 'application/json' || 
+            file.originalname.endsWith('.json') ||
+            file.mimetype === 'text/csv' || 
+            file.originalname.endsWith('.csv')) {
+            cb(null, true);
+        } else {
+            cb(new Error('只允许上传JSON或CSV文件'), false);
+        }
+    }
 });
+
 
 // 初始化数据目录
 function initData() {
+    const usersPath = path.join(__dirname, 'data', 'users.json');
+    
+    if (!fs.existsSync(usersPath)) {
+        console.log('初始化用户数据文件...');
+        fs.writeFileSync(usersPath, JSON.stringify([
+            {
+                id: 1,
+                username: 'superadmin',
+                password: 'superadmin321',
+                role: 'admin',
+                isSystem: true
+            }
+        ], null, 2));
+    }
+
+    //--------------------------------------
     if (!fs.existsSync('data')) fs.mkdirSync('data');
+    
+    const defaultAdmin = {
+        id: 1,
+        username: 'superadmin',
+        password: 'superadmin321', // 应提示首次登录后修改
+        role: 'admin',
+        isSystem: true // 标记为系统账户
+    };
+    if (!fs.existsSync('data/users.json')) {
+        fs.writeFileSync('data/users.json', JSON.stringify([defaultAdmin]));
+    }
+
+
     if (!fs.existsSync('uploads')) fs.mkdirSync('uploads');
 
     if (!fs.existsSync('data/users.json')) {
@@ -94,11 +142,206 @@ function initData() {
             vocabCount: 0
         }));
     }
+
+    if (!fs.existsSync('data/logs.json')) {
+        fs.writeFileSync('data/logs.json', JSON.stringify([]));
+    }
 }
 initData();
 
 
+//==============================================================================放在最后就失败报错，why?
+// 用户数据导出路由
+app.get('/api/users/export', requireAuth, async (req, res) => {
+    //console.log('接收到导出请求'); // 调试日志
+    
+    try {
+        // 1. 验证超级管理员权限
+        if (!req.session.user?.isSystem) {
+            console.warn(`非法导出尝试 by ${req.session.user?.username || '未知用户'}`);
+            return res.status(403).json({ 
+                error: '权限不足：仅超级管理员可执行此操作' 
+            });
+        }
 
+        // 2. 确认文件路径
+        const usersPath = path.join(__dirname, 'data', 'users.json');
+        //console.log('尝试访问文件:', usersPath);
+        
+        if (!fs.existsSync(usersPath)) {
+            console.error('用户数据文件不存在');
+            return res.status(404).json({ error: '系统未初始化用户数据' });
+        }
+
+        // 3. 读取并处理数据
+        const fileContent = fs.readFileSync(usersPath, 'utf8');
+        const users = JSON.parse(fileContent);
+        
+        const exportData = users
+            .filter(user => !user.isSystem) // 过滤系统账户
+            .map(({ isSystem, ...safeData }) => safeData); // 移除敏感字段  //.map(({ password, isSystem, ...safeData }) => safeData); // 移除敏感字段
+
+        //console.log(`准备导出 ${exportData.length} 条用户记录`);
+        
+        // 4. 发送响应
+        res.setHeader('Content-Type', 'application/json');
+        res.setHeader('Content-Disposition', 'attachment; filename=users_export.json');
+        return res.json(exportData);
+
+    } catch (error) {
+        console.error('导出处理失败:', error);
+        return res.status(500).json({ 
+            error: '服务器处理导出请求时出错',
+            details: process.env.NODE_ENV === 'development' ? error.message : undefined
+        });
+    }
+});
+
+//用户数据导入路由
+app.post('/api/users/import', requireAuth, upload.single('file'), async (req, res) => {
+    if (!req.session.user?.isSystem) {
+        return res.status(403).json({ 
+            error: '无权操作: 仅超级管理员可导入用户数据',
+            details: '当前用户没有足够的权限'
+        });
+    }
+    
+    if (!req.file) {
+        return res.status(400).json({ 
+            error: '未上传文件',
+            details: '请选择有效的JSON或CSV文件'
+        });
+    }
+    
+    try {
+        const fileContent = fs.readFileSync(req.file.path, 'utf8');
+        let importedUsers;
+        
+        // 检查文件类型并解析
+        if (req.file.originalname.endsWith('.json') || req.file.mimetype === 'application/json') {
+            try {
+                importedUsers = JSON.parse(fileContent);
+                if (!Array.isArray(importedUsers)) {
+                    throw new Error('JSON文件应包含用户数组');
+                }
+            } catch (parseError) {
+                throw new Error(`JSON解析失败: ${parseError.message}`);
+            }
+        } else if (req.file.originalname.endsWith('.csv') || req.file.mimetype === 'text/csv') {
+            importedUsers = parse(fileContent, {
+                columns: true,
+                skip_empty_lines: true,
+                trim: true
+            });
+        } else {
+            throw new Error('不支持的文件格式');
+        }
+
+        // 验证导入数据
+        if (!importedUsers || importedUsers.length === 0) {
+            throw new Error('导入文件没有有效数据');
+        }
+
+        const currentUsers = JSON.parse(fs.readFileSync('data/users.json', 'utf8'));
+        const overwrite = req.body.overwrite === 'true';
+        
+        let importedCount = 0;
+        let skippedCount = 0;
+        let errors = [];
+        
+        for (const importedUser of importedUsers) {
+            try {
+                // 跳过系统账户
+                if (importedUser.isSystem) {
+                    skippedCount++;
+                    continue;
+                }
+                
+                // 验证必要字段
+                if (!importedUser.username || !importedUser.role) {
+                    errors.push(`用户缺少必要字段: ${JSON.stringify(importedUser)}`);
+                    continue;
+                }
+                
+                const existingIndex = currentUsers.findIndex(u => 
+                    u.id === importedUser.id || u.username === importedUser.username
+                );
+                
+                if (existingIndex >= 0) {
+                    if (overwrite) {
+                        // 保留原始密码(如果不提供新密码)
+                        if (!importedUser.password) {
+                            importedUser.password = currentUsers[existingIndex].password;
+                        }
+                        currentUsers[existingIndex] = {
+                            ...currentUsers[existingIndex],
+                            ...importedUser,
+                            id: currentUsers[existingIndex].id // 保持原始ID不变
+                        };
+                        importedCount++;
+                    } else {
+                        skippedCount++;
+                    }
+                } else {
+                    // 为新用户设置默认密码(如果未提供)
+                    if (!importedUser.password) {
+                        importedUser.password = generateRandomPassword();
+                    }
+                    // 确保新用户有唯一ID
+                    importedUser.id = getNextId(currentUsers);
+                    currentUsers.push(importedUser);
+                    importedCount++;
+                }
+            } catch (userError) {
+                errors.push(`处理用户 ${importedUser.username || '未知用户'} 失败: ${userError.message}`);
+            }
+        }
+        
+        // 保存更新后的用户数据
+        fs.writeFileSync('data/users.json', JSON.stringify(currentUsers, null, 2));
+        
+        // 清理上传的临时文件
+        if (req.file && fs.existsSync(req.file.path)) {
+            fs.unlinkSync(req.file.path);
+        }
+        
+        // 返回导入结果
+        res.json({ 
+            success: true, 
+            imported: importedCount,
+            skipped: skippedCount,
+            totalUsers: currentUsers.length,
+            errors: errors.length > 0 ? errors : undefined
+        });
+        
+    } catch (error) {
+        console.error('导入用户失败:', error);
+        
+        // 清理上传的临时文件
+        if (req.file && fs.existsSync(req.file.path)) {
+            fs.unlinkSync(req.file.path);
+        }
+        
+        res.status(500).json({ 
+            error: '导入用户失败',
+            details: error.message,
+            stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+        });
+    }
+});
+
+// 生成随机密码函数
+function generateRandomPassword(length = 12) {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
+    let password = '';
+    for (let i = 0; i < length; i++) {
+        password += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return password;
+}
+
+
+//==============================================================================
 // 用户认证中间件
 function requireAuth(req, res, next) {
     if (!req.session.user) {
@@ -149,7 +392,7 @@ app.post('/api/register', (req, res) => {
 
 
 // 修改登录路由，增加登录计数
-app.post('/api/login', (req, res) => {
+/* app.post('/api/login', (req, res) => {
     const { username, password } = req.body;
     const users = JSON.parse(fs.readFileSync('data/users.json'));
 
@@ -170,7 +413,127 @@ app.post('/api/login', (req, res) => {
         role: user.role,
         loginCount: stats.totalLogins // 返回登录计数
     });
+}); */
+
+
+// 用户登录路由
+/* app.post('/api/login', (req, res) => {
+    const { username, password } = req.body;
+    const users = JSON.parse(fs.readFileSync('data/users.json'));
+
+    const user = users.find(u => u.username === username && u.password === password);
+    if (!user) {
+        // 记录失败的登录尝试
+        recordLoginAttempt(username, req.ip, false);
+        return res.status(401).json({ error: '用户名或密码错误' });
+    }
+
+    // 更新登录计数
+    const stats = JSON.parse(fs.readFileSync('data/stats.json'));
+    stats.totalLogins++;
+    fs.writeFileSync('data/stats.json', JSON.stringify(stats, null, 2));
+
+    req.session.user = user;
+    
+    // 记录成功的登录
+    recordLoginAttempt(username, req.ip, true);
+    
+    res.json({ 
+        success: true, 
+        username: user.username,
+        role: user.role,
+        loginCount: stats.totalLogins
+    });
+}); */
+
+/* app.post('/api/login', (req, res) => {
+    const { username, password } = req.body;
+    const users = JSON.parse(fs.readFileSync('data/users.json'));
+
+    const user = users.find(u => u.username === username && u.password === password);
+    if (!user) {
+        recordLoginAttempt(username, req.ip, false);
+        return res.status(401).json({ error: '用户名或密码错误' });
+    }
+
+    // 更新登录计数
+    const stats = JSON.parse(fs.readFileSync('data/stats.json'));
+    stats.totalLogins++;
+    fs.writeFileSync('data/stats.json', JSON.stringify(stats, null, 2));
+
+    // 存储完整的用户信息到session
+    req.session.user = {
+        id: user.id,
+        username: user.username,
+        role: user.role,
+        isSystem: user.isSystem || false
+    };
+    
+    recordLoginAttempt(username, req.ip, true);
+    
+    res.json({ 
+        success: true, 
+        user: {
+            id: user.id,
+            username: user.username,
+            role: user.role
+        },
+        loginCount: stats.totalLogins
+    });
+}); */
+
+app.post('/api/login', (req, res) => {
+    const { username, password } = req.body;
+    const users = JSON.parse(fs.readFileSync('data/users.json'));
+
+    const user = users.find(u => u.username === username && u.password === password);
+    if (!user) {
+        recordLoginAttempt(username, req.ip, false);
+        return res.status(401).json({ error: '用户名或密码错误' });
+    }
+
+    // 更新登录计数
+    const stats = JSON.parse(fs.readFileSync('data/stats.json'));
+    stats.totalLogins++;
+    fs.writeFileSync('data/stats.json', JSON.stringify(stats, null, 2));
+
+    // 设置session - 包含完整用户信息
+    req.session.user = {
+        id: user.id,
+        username: user.username,
+        role: user.role,
+        isSystem: user.isSystem || false
+    };
+    
+    recordLoginAttempt(username, req.ip, true);
+    
+    res.json({ 
+        success: true,
+        user: req.session.user,
+        loginCount: stats.totalLogins
+    });
 });
+
+// 专用函数记录登录尝试
+function recordLoginAttempt(username, ip, success) {
+    try {
+        const logs = JSON.parse(fs.readFileSync('data/logs.json'));
+        const newLog = {
+            timestamp: new Date().toISOString(),
+            username: username || 'unknown',
+            ip: ip,
+            actionType: '用户登录',
+            details: success ? '登录成功' : '登录失败',
+            success: success
+        };
+        
+        logs.push(newLog);
+        fs.writeFileSync('data/logs.json', JSON.stringify(logs, null, 2));
+    } catch (error) {
+        console.error('记录登录日志失败:', error);
+    }
+}
+
 
 // 用户注销
 app.post('/api/logout', (req, res) => {
@@ -200,7 +563,7 @@ app.post('/api/logout', (req, res) => {
 }); */
 
 
-app.get('/api/current-user', (req, res) => {
+/* app.get('/api/current-user', (req, res) => {
     if (!req.session.user) return res.status(401).json({ error: '未登录' });
     
     // 从 stats.json 读取 loginCount
@@ -212,6 +575,29 @@ app.get('/api/current-user', (req, res) => {
             role: req.session.user.role
         },
         loginCount: stats.totalLogins // 返回登录计数
+    });
+}); */
+
+
+// 确保 /api/current-user 返回完整信息
+app.get('/api/current-user', (req, res) => {
+    if (!req.session.user) return res.status(401).json({ error: '未登录' });
+    
+    const stats = JSON.parse(fs.readFileSync('data/stats.json'));
+    const users = JSON.parse(fs.readFileSync('data/users.json'));
+    
+    // 从用户文件中获取完整用户信息
+    const fullUser = users.find(u => u.id === req.session.user.id);
+    if (!fullUser) return res.status(404).json({ error: '用户不存在' });
+    
+    res.json({ 
+        user: {
+            id: fullUser.id,
+            username: fullUser.username,
+            role: fullUser.role,
+            isSystem: fullUser.isSystem || false
+        },
+        loginCount: stats.totalLogins
     });
 });
 
@@ -599,7 +985,7 @@ app.delete('/api/vocab/:id', requireAuth, (req, res) => {
 
 
 // 后端
-app.post('/api/vocab/clear-all', requireAuth, (req, res) => {
+/* app.post('/api/vocab/clear-all', requireAuth, (req, res) => {
     console.log('DELETE /api/vocab/all 请求到达'); // 调试日志
     // 检查用户权限
     if (req.session.user.role !== 'admin') {
@@ -614,7 +1000,26 @@ app.post('/api/vocab/clear-all', requireAuth, (req, res) => {
         console.error('删除全部词汇错误:', err);
         res.status(500).json({ error: '删除失败: ' + err.message });
     }
+}); */
+
+// 全部删除路由示例
+app.post('/api/vocab/clear-all', requireAuth, async (req, res) => {
+    if (!req.session.user.isSystem) {
+        return res.status(403).json({ 
+            error: '无权操作: 仅超级管理员可执行此操作' 
+        });
+    }
+    
+    try {
+        // 清空词汇文件
+        fs.writeFileSync('data/vocab.json', JSON.stringify([]));
+        res.json({ success: true });
+    } catch (err) {
+        console.error('删除全部词汇错误:', err);
+        res.status(500).json({ error: '删除失败: ' + err.message });
+    }
 });
+
 
 
 // 添加获取统计信息的API
@@ -655,15 +1060,301 @@ app.get('/api/stats', (req, res) => {
 }); */
 
 
-app.get('/tencent2693888209070690156.txt', (req, res) => {
-  res.sendFile(path.join(__dirname, 'tencent2693888209070690156.txt'));
+//=================================================================
+// 获取单个用户信息
+app.get('/api/users/:id', requireAuth, (req, res) => {
+    try {
+        const users = JSON.parse(fs.readFileSync('data/users.json'));
+        const user = users.find(u => u.id === parseInt(req.params.id));
+        
+        if (!user) {
+            return res.status(404).json({ error: '用户未找到' });
+        }
+        
+        // 不返回密码等敏感信息
+        const { password, ...userData } = user;
+        res.json(userData);
+    } catch (error) {
+        console.error('获取用户信息失败:', error);
+        res.status(500).json({ error: '获取用户信息失败' });
+    }
 });
+
+// 获取所有用户
+app.get('/api/users', requireAuth, (req, res) => {
+    if (req.session.user.role !== 'admin') {
+        return res.status(403).json({ error: '无权访问' });
+    }
+    
+    const users = JSON.parse(fs.readFileSync('data/users.json'));
+    
+    // 过滤掉系统账户
+    const filteredUsers = users.filter(user => !user.isSystem);
+    res.json(filteredUsers);
+});
+
+// 更新用户信息
+app.put('/api/users/:id', requireAuth, (req, res) => {
+    if (req.session.user.role !== 'admin') {
+        return res.status(403).json({ error: '无权操作' });
+    }
+    
+    const id = parseInt(req.params.id);
+    const { username, password, role } = req.body;
+    
+    if (!username || !role) {
+        return res.status(400).json({ error: '用户名和角色不能为空' });
+    }
+    
+    try {
+        const users = JSON.parse(fs.readFileSync('data/users.json'));
+        const userIndex = users.findIndex(u => u.id === id);
+        
+        if (userIndex === -1) {
+            return res.status(404).json({ error: '用户未找到' });
+        }
+        
+        // 检查是否是系统账户
+        if (users[userIndex].isSystem) {
+            return res.status(403).json({ error: '系统内置账户不可修改' });
+        }
+
+        // 检查是否是最后一个管理员被降级
+        if (users[userIndex].role === 'admin' && role === 'user') {
+            const otherAdmins = users.filter(u => u.role === 'admin' && u.id !== id);
+            if (otherAdmins.length === 0) {
+                return res.status(400).json({ error: '系统中必须至少保留一个管理员账户' });
+            }
+        }
+        
+        // 更新用户信息
+        users[userIndex] = {
+            ...users[userIndex],
+            username,
+            role,
+            // 只有提供了新密码才更新密码
+            password: password ? password : users[userIndex].password
+        };
+        
+        fs.writeFileSync('data/users.json', JSON.stringify(users, null, 2));
+        res.json({ success: true, user: users[userIndex] });
+    } catch (error) {
+        console.error('更新用户错误:', error);
+        res.status(500).json({ error: '更新用户失败' });
+    }
+});
+
+// 删除用户
+app.delete('/api/users/:id', requireAuth, (req, res) => {
+    if (req.session.user.role !== 'admin') {
+        return res.status(403).json({ error: '无权操作' });
+    }
+    
+    const id = parseInt(req.params.id);
+    let users = JSON.parse(fs.readFileSync('data/users.json'));
+
+    // 检查是否是系统账户
+    const userToDelete = users.find(u => u.id === id);
+    if (userToDelete && userToDelete.isSystem) {
+        return res.status(403).json({ error: '系统内置账户不可删除' });
+    }
+
+    // 检查是否是最后一个管理员
+    //const userToDelete = users.find(u => u.id === id);
+    if (userToDelete && userToDelete.role === 'admin') {
+        const otherAdmins = users.filter(u => u.role === 'admin' && u.id !== id);
+        if (otherAdmins.length === 0) {
+            return res.status(400).json({ error: '不能删除最后一个管理员账户' });
+        }
+    }
+    /* if (userToUpdate.isSystem) {
+        return res.status(400).json({ error: '系统内置账户不可修改' });
+    } */
+    
+    // 不能删除自己
+    if (id === req.session.user.id) {
+        return res.status(400).json({ error: '不能删除当前登录的用户' });
+    }
+    
+    const initialLength = users.length;
+    users = users.filter(u => u.id !== id);
+    
+    if (users.length === initialLength) {
+        return res.status(404).json({ error: '用户未找到' });
+    }
+    
+    fs.writeFileSync('data/users.json', JSON.stringify(users, null, 2));
+    res.json({ success: true });
+});
+
+
+//============================================================================
+// 日志记录中间件
+function logAction(req, res, next) {
+    const originalSend = res.send;
+    res.send = function(body) {
+        // 只记录成功的操作
+        if (res.statusCode >= 200 && res.statusCode < 300) {
+            const logs = JSON.parse(fs.readFileSync('data/logs.json'));
+            const newLog = {
+                timestamp: new Date().toISOString(),
+                username: req.session.user?.username || 'anonymous',
+                ip: req.ip,
+                actionType: `${req.method} ${req.path}`,
+                details: JSON.stringify({
+                    params: req.params,
+                    query: req.query,
+                    body: req.body
+                })
+            };
+            
+            logs.push(newLog);
+            fs.writeFileSync('data/logs.json', JSON.stringify(logs, null, 2));
+        }
+        originalSend.call(this, body);
+    };
+    next();
+}
+
+// 应用日志中间件
+//app.use(logAction);  //20250429 暂时注释
+
+
+// 获取日志API
+/* app.get('/api/logs', requireAuth, (req, res) => {
+    if (req.session.user.role !== 'admin') {
+        return res.status(403).json({ error: '无权访问' });
+    }
+    
+    try {
+        const logs = JSON.parse(fs.readFileSync('data/logs.json'));
+        res.json(logs);
+    } catch (error) {
+        console.error('获取日志失败:', error);
+        res.status(500).json({ error: '获取日志失败' });
+    }
+}); */
+
+// 获取日志API - 只允许超级管理员访问
+// 修改获取日志的API，添加排序功能
+app.get('/api/logs', requireAuth, (req, res) => {
+    if (!req.session.user.isSystem) {
+        return res.status(403).json({ 
+            error: '无权访问: 仅超级管理员可查看系统日志' 
+        });
+    }
+    
+    try {
+        const logs = JSON.parse(fs.readFileSync('data/logs.json'));
+        
+        // 按时间倒序排序 (最新的在前)
+        logs.sort((a, b) => {
+            return new Date(b.timestamp) - new Date(a.timestamp);
+        });
+        
+        res.json(logs);
+    } catch (error) {
+        console.error('获取日志失败:', error);
+        res.status(500).json({ error: '获取日志失败' });
+    }
+});
+
+// 清理日志API
+app.post('/api/logs/clean', requireAuth, (req, res) => {
+    if (!req.session.user.isSystem) {
+        return res.status(403).json({ 
+            error: '无权操作: 仅超级管理员可清理日志' 
+        });
+    }
+
+    if (req.session.user.role !== 'admin') {
+        return res.status(403).json({ error: '无权操作' });
+    }
+    
+    try {
+        const logs = JSON.parse(fs.readFileSync('data/logs.json'));
+        const threeMonthsAgo = new Date();
+        threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
+        
+        const filteredLogs = logs.filter(log => 
+            new Date(log.timestamp) > threeMonthsAgo
+        );
+        
+        fs.writeFileSync('data/logs.json', JSON.stringify(filteredLogs, null, 2));
+        res.json({ success: true, remaining: filteredLogs.length });
+    } catch (error) {
+        console.error('清理日志失败:', error);
+        res.status(500).json({ error: '清理日志失败' });
+    }
+});
+//----------------------------------------------------------------------------
+
+// 确保已安装必要的模块
+//const fs = require('fs');
+//const path = require('path');
+
+// 用户数据导出路由
+// 用户数据导出路由 - 确保在server.js中正确添加
+// 确保在server.js中添加以下路由
+// 添加在server.js的其他路由附近
+/* app.get('/api/users/export', requireAuth, async (req, res) => {
+    try {
+        // 1. 验证超级管理员权限
+        if (!req.session.user?.isSystem) {
+            console.log(`非法导出尝试 by: ${req.session.user?.username}`);
+            return res.status(403).json({ error: '仅超级管理员可导出用户数据' });
+        }
+
+        // 2. 确认文件路径
+        const usersPath = path.join(__dirname, 'data', 'users.json');
+        console.log(`尝试访问文件路径: ${usersPath}`);
+        
+        if (!fs.existsSync(usersPath)) {
+            console.error('用户文件不存在');
+            return res.status(404).json({ error: '用户数据未初始化' });
+        }
+
+        // 3. 读取并处理数据
+        const users = JSON.parse(fs.readFileSync(usersPath, 'utf8'));
+        const exportData = users
+            .filter(user => !user.isSystem)
+            .map(({ password, isSystem, ...rest }) => rest);
+
+        // 4. 发送响应
+        res.setHeader('Content-Type', 'application/json');
+        res.setHeader('Content-Disposition', 'attachment; filename=users_export.json');
+        res.json(exportData);
+
+    } catch (error) {
+        console.error('导出处理错误:', error);
+        res.status(500).json({ error: '服务器处理导出请求时出错' });
+    }
+}); */
+
+// 导入用户数据API
+//const upload = multer({ dest: 'uploads/' });
+
+
+
+
+//==============================================================================
+
+//微信验证
+app.get('/tencent2693888209070690156.txt', (req, res) => {
+    res.sendFile(path.join(__dirname, 'tencent2693888209070690156.txt'));
+  });
+
 
 // 处理前端路由
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+
+
+//========================================================================
+
+//========================================================================
 
 // 错误处理
 app.use((err, req, res, next) => {

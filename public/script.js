@@ -111,7 +111,7 @@ function initAdminFeatures() {
 
 
 // 初始化页面
-async function initPage() {
+/* async function initPage() {
     const isAdmin = await checkPermissions();
     console.log('管理员状态:', isAdmin);
     
@@ -141,11 +141,55 @@ async function initPage() {
     }
     
     await updateRoleHint();
+} */
+
+// 初始化页面
+async function initPage() {
+    const { isAdmin, isSuperAdmin } = await checkAndUpdateUI();
+    console.log('管理员状态:', isAdmin, '超级管理员状态:', isSuperAdmin);
+    
+    if (isAdmin) {
+        document.body.classList.add('admin-mode');
+        ['add-vocab-btn'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                el.style.display = 'block';
+                console.log('显示元素:', id);
+            }
+        });
+    }
+    
+    if (isSuperAdmin) {
+        document.body.classList.add('super-mode');
+        ['export-btn', 'import-form', 'delete-all-btn'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                el.style.display = 'block';
+                console.log('显示超级管理员元素:', id);
+            }
+        });
+    }
+
+    // 确保先加载词汇再更新统计
+    await loadVocab(1, pageSize); // 明确传递初始参数
+
+    // 获取统计信息
+    try {
+        const statsResponse = await fetch('/api/stats');
+        if (statsResponse.ok) {
+            const stats = await statsResponse.json();
+            updateVocabCount(stats.vocabCount);
+        }
+    } catch (error) {
+        console.error('获取统计信息失败:', error);
+    }
+    
+    await updateRoleHint();
 }
 
 
 // 修改后的权限检查函数
-async function checkAndUpdateUI() {
+/* async function checkAndUpdateUI() {
   try {
     const response = await fetch('/api/current-user');
     if (!response.ok) throw new Error('获取用户信息失败');
@@ -172,6 +216,50 @@ async function checkAndUpdateUI() {
     console.error('权限检查错误:', error);
     return false;
   }
+} */
+
+// 修改后的权限检查函数
+async function checkAndUpdateUI() {
+    try {
+        const response = await fetch('/api/current-user');
+        if (!response.ok) throw new Error('获取用户信息失败');
+        
+        const { user } = await response.json();
+        console.log('当前用户信息:', user); // 调试输出
+        
+        const isAdmin = user?.role === 'admin';
+        const isSuperAdmin = user?.isSystem; // 检查是否是超级管理员
+        
+        // 显示/隐藏管理按钮
+        document.querySelectorAll('.admin-only').forEach(el => {
+        el.style.display = isAdmin ? 'block' : 'none';
+        });
+        
+        // 显示/隐藏超级管理员专属按钮
+        document.querySelectorAll('.super-only').forEach(el => {
+        el.style.display = isSuperAdmin ? 'block' : 'none';
+        });
+        
+        // 更新角色提示
+        const roleHint = document.getElementById('user-role-hint');
+        if (roleHint) {
+        if (isSuperAdmin) {
+            roleHint.textContent = '超级管理员模式';
+            roleHint.className = 'role-hint super-hint';
+        } else if (isAdmin) {
+            roleHint.textContent = '管理员模式';
+            roleHint.className = 'role-hint admin-hint';
+        } else {
+            roleHint.textContent = '普通用户模式';
+            roleHint.className = 'role-hint user-hint';
+        }
+        }
+        
+        return { isAdmin, isSuperAdmin };
+    } catch (error) {
+        console.error('权限检查错误:', error);
+        return { isAdmin: false, isSuperAdmin: false };
+    }
 }
 
 

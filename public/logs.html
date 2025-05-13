@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>系统日志</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>系统日志</h1>
+            <div id="user-info">
+                <span id="username"></span>
+                <button id="translate-btn">返回翻译</button>
+                <button id="logout-btn">注销</button>
+                <div id="user-role-hint"></div>
+            </div>
+        </header>
+
+        <main>
+            <section id="logs-section">
+                <div class="actions">
+                    <button id="clean-logs-btn">清理3个月前的日志</button>
+                </div>
+                
+                <table id="logs-table">
+                    <thead>
+                        <tr>
+                            <!-- <th>时间</th>
+                            <th>用户名</th>
+                            <th>IP地址</th>
+                            <th>操作类型</th>
+                            <th>详情</th> -->
+                            <th>时间</th>
+                            <th>用户名</th>
+                            <th>IP地址</th>
+                            <th>操作类型</th>
+                            <th>详情</th>
+                            <th>状态</th> <!-- 新增状态列 -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 日志数据将通过JavaScript动态加载 -->
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <script src="logs.js"></script>
+</body>
+</html>

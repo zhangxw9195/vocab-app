@@ -827,3 +827,232 @@ tr.highlight {
     font-size: 14px;
     color: #666;
 }
+
+
+/*****************************************/
+/* 用户管理页面特定样式 */
+#user-table th, #user-table td {
+    padding: 10px 15px;
+}
+
+#user-table td:last-child {
+    min-width: 180px;
+}
+
+/* 用户角色选择框 */
+.edit-role {
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+/* 用户编辑输入框 */
+.edit-username {
+    width: 90%;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+/* 用户操作按钮 */
+.edit-user-btn, .save-user-btn {
+    background-color: #2196F3;
+}
+
+.delete-user-btn, .cancel-user-btn {
+    background-color: #f44336;
+}
+
+/* 添加用户模态框 */
+#add-user-form .form-group {
+    margin-bottom: 15px;
+}
+
+#add-user-form select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+
+/**************************************************20250429*/
+/* 管理员专用按钮样式 */
+.admin-only {
+    display: none;
+}
+
+.admin-mode .admin-only {
+    display: inline-block;
+}
+
+/* 日志表格样式 */
+#logs-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#logs-table th, #logs-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#logs-table th {
+    background-color: #f2f2f2;
+    position: sticky;
+    top: 0;
+}
+
+#logs-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#logs-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* 操作按钮样式 */
+.actions {
+    margin-bottom: 15px;
+}
+
+.actions button {
+    padding: 8px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.actions button:hover {
+    background-color: #45a049;
+}
+
+/**/
+/* 登录日志特殊样式 */
+.login-success {
+    background-color: #e6ffe6; /* 浅绿色背景表示成功 */
+}
+
+.login-fail {
+    background-color: #ffe6e6; /* 浅红色背景表示失败 */
+}
+
+#logs-table td:nth-child(6) {
+    font-weight: bold;
+    color: #333;
+}
+
+#logs-table td:nth-child(6):contains("成功") {
+    color: green;
+}
+
+#logs-table td:nth-child(6):contains("失败") {
+    color: red;
+}
+
+
+/*******************************/
+/* 超级管理员专用按钮样式 */
+.super-only {
+    display: none;
+}
+
+.super-mode .super-only {
+    display: inline-block;
+    background-color: #ff9900; /* 橙色区分超级管理员按钮 */
+    color: white;
+}
+
+.super-mode .super-only:hover {
+    background-color: #e68a00;
+}
+
+/* 管理员按钮样式保持不变 */
+.admin-only {
+    display: none;
+}
+
+.admin-mode .admin-only {
+    display: inline-block;
+}
+
+
+/*************************************/
+/* 导入导出按钮样式 */
+.super-only {
+    display: none;
+}
+
+.super-mode .super-only {
+    display: inline-block;
+    margin-left: 10px;
+    background-color: #ff9800;
+    color: white;
+}
+
+.super-mode .super-only:hover {
+    background-color: #e68a00;
+}
+
+/* 导入模态框样式 */
+#import-user-modal .modal-content {
+    max-width: 500px;
+}
+
+#import-user-form .form-group {
+    margin-bottom: 15px;
+}
+
+#import-user-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#import-user-form input[type="file"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+
+/**/
+/* 超级管理员专用按钮样式 */
+.super-only {
+    display: none !important;
+}
+
+.super-mode .super-only {
+    display: inline-block !important;
+    background-color: #ff9800;
+    color: white;
+}
+
+.super-mode .super-only:hover {
+    background-color: #e68a00;
+}
+
+
+/*************************************/
+.hint {
+    font-size: 0.8em;
+    color: #666;
+    margin-top: 0.2em;
+}
+
+/* 格式选择提示 */
+.format-hint {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 0.9em;
+    color: #666;
+}
+
+
+/*****************************/
+

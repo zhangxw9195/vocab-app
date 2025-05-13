@@ -44,14 +44,22 @@
                     
                     <!-- 只有管理员可见 -->
                     <button id="add-vocab-btn" style="display:none;" class="admin-only">添加词汇</button>
-                    <button id="export-btn" style="display:none;" class="admin-only">导出CSV</button>
+                    <!-- <button id="export-btn" style="display:none;" class="admin-only">导出CSV</button>
                     <form id="import-form" style="display:none;" class="admin-only">
                         <input type="file" id="import-file" accept=".csv">
                         <button type="submit">导入CSV</button>
-                    </form>
+                    </form> -->
 
                     <!-- 新增全部删除按钮 -->
-                    <button id="delete-all-btn" class="admin-only">全部删除</button>
+                    <!-- <button id="delete-all-btn" class="admin-only">全部删除</button> -->
+
+                    <!-- 修改这部分按钮 -->
+                    <button id="export-btn" style="display:none;" class="super-only">导出CSV</button>
+                    <form id="import-form" style="display:none;" class="super-only">
+                        <input type="file" id="import-file" accept=".csv">
+                        <button type="submit">导入CSV</button>
+                    </form>
+                    <button id="delete-all-btn" class="super-only">全部删除</button>
     
                     <!-- 用户角色提示 -->
                     <div id="user-role-hint"></div>

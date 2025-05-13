@@ -227,9 +227,19 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
+    // 事件监听 - 日志按钮
+    document.getElementById('logs-btn').addEventListener('click', () => {
+        window.location.href = '/logs.html';
+    });
+
     // 事件监听 - 管理按钮
     document.getElementById('manage-btn').addEventListener('click', () => {
         window.location.href = '/index.html';
+    });
+
+    // 新增事件监听 - 用户管理按钮
+    document.getElementById('user-manage-btn').addEventListener('click', () => {
+        window.location.href = '/users.html';
     });
 
     // 事件监听 - 搜索按钮
@@ -250,7 +260,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 // 检查用户权限并更新UI
-async function checkAndUpdateUI() {
+/* async function checkAndUpdateUI() {
     try {
         const response = await fetch('/api/current-user');
         if (!response.ok) return;
@@ -271,7 +281,57 @@ async function checkAndUpdateUI() {
     } catch (error) {
         console.error('权限检查失败:', error);
     }
+} */
+
+// 修改checkAndUpdateUI函数
+async function checkAndUpdateUI() {
+    try {
+        const response = await fetch('/api/current-user');
+        if (!response.ok) {
+            console.error('获取当前用户信息失败:', response.status);
+            return;
+        }
+        
+        const data = await response.json();
+        if (!data || !data.user) {
+            console.error('无效的用户数据:', data);
+            return;
+        }
+        
+        const { user } = data;
+        const roleHint = document.getElementById('user-role-hint');
+        
+        // 调试日志 - 可以稍后移除
+        console.log('当前用户信息:', user);
+        
+        // 重置所有权限相关UI
+        document.body.classList.remove('admin-mode', 'super-mode');
+        document.getElementById('user-manage-btn').style.display = 'none';
+        document.getElementById('logs-btn').style.display = 'none';
+        
+        if (user.role === 'admin') {
+            document.body.classList.add('admin-mode');
+            roleHint.textContent = user.isSystem ? '超级管理员模式' : '管理员模式';
+            roleHint.className = 'role-admin';
+            
+            // 对所有管理员显示用户管理按钮
+            document.getElementById('user-manage-btn').style.display = 'inline-block';
+            
+            if (user.isSystem) {
+                // 仅对超级管理员显示日志按钮
+                document.body.classList.add('super-mode');
+                document.getElementById('logs-btn').style.display = 'inline-block';
+            }
+        } else {
+            roleHint.textContent = '普通用户模式';
+            roleHint.className = 'role-user';
+        }
+    } catch (error) {
+        console.error('权限检查失败:', error);
+    }
 }
+
+
 
 // 页面加载时执行
 document.addEventListener('DOMContentLoaded', checkAndUpdateUI);
